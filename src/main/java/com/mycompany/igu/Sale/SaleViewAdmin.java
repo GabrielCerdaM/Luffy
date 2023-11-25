@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu.Sale;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
@@ -139,6 +140,9 @@ public class SaleViewAdmin extends javax.swing.JFrame {
 
     private void btnExit5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit5ActionPerformed
         // TODO add your handling code here:
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExit5ActionPerformed
 
@@ -176,7 +180,7 @@ public class SaleViewAdmin extends javax.swing.JFrame {
 
         List<Sale> sales = controller.getSales();
         for(Sale sale: sales){
-            Object[] o = new Object[]{sale.getId(),sale.getDate(),sale.getHour(),sale.getTotal()};
+            Object[] o = new Object[]{sale.getId(),sale.getTotal()};
             model.addRow(o);
         }
         

@@ -272,9 +272,25 @@ public class Controller {
         DetailSale dSale = ds.get(size);        
         return dSale.getId();
     }
+    
+        public int getLastSaleId() {
+        List<Sale> sales = getSales();
+        int size = sales.size() -1;
+        if(size == -1){
+            return 0;
+        }
+        Sale sale = sales.get(size);        
+        return sale.getId();
+    }
 
     public List<DetailSale> getDetailSale(int saleId) {
         return persistanceController.getDetailSale(saleId);
+    }
+
+    public void createSale(Sale sale) {
+        int lastSaleId = getLastSaleId();
+        sale.setId(lastSaleId + 1);
+        persistanceController.createSale(sale);
     }
 
 }

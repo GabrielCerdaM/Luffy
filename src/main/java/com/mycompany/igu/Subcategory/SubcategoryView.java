@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu.Subcategory;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.Subcategory;
 import com.mycompany.logic.User;
@@ -201,7 +202,9 @@ public class SubcategoryView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateSubcategoryActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 

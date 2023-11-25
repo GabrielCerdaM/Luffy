@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.igu.Category.CategoryView;
 import com.mycompany.igu.Product.ProductView;
 import com.mycompany.igu.Sale.SaleViewAdmin;
@@ -164,34 +165,10 @@ public class Main extends javax.swing.JFrame {
         }
         switch (user.getRol().getName()) {
             case "admin" -> {
-                Ticket t = new Ticket(controller, user);
-                t.setVisible(true);
-                t.setLocationRelativeTo(null);
+                HomeAdmin homeView = new HomeAdmin(controller, user);
+                homeView.setVisible(true);
+                homeView.setLocationRelativeTo(null);
                 this.dispose();
-//                SaleViewAdmin saleView = new SaleViewAdmin(controller, user);
-//                saleView.setVisible(true);
-//                saleView.setLocationRelativeTo(null);
-//                this.dispose();
-
-//                ProductView pView = new ProductView(controller, user);
-//                pView.setVisible(true);
-//                pView.setLocationRelativeTo(null);
-//                this.dispose();
-
-//                SubcategoryView scView = new SubcategoryView(controller, user);
-//                scView.setVisible(true);
-//                scView.setLocationRelativeTo(null);
-//                this.dispose();
-                
-//                CategoryView categoryView = new CategoryView(controller, user);
-//                categoryView.setVisible(true);
-//                categoryView.setLocationRelativeTo(null);
-//                this.dispose();
-
-//                UserViewAdmin pAdmin = new UserViewAdmin(controller,user);
-//                pAdmin.setVisible(true);
-//                pAdmin.setLocationRelativeTo(null);
-//                this.dispose();
             }
             case "user" -> {
                 UserView pUser = new UserView(controller,user);

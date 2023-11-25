@@ -166,4 +166,8 @@ public class PersistanceController {
         return detailSaleJpa.findDetailSaleEntities();
     }
 
+    public void createSale(Sale sale) {
+        saleJpa.create(sale);
+    }
+
 }

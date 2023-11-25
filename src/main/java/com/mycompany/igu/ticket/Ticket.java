@@ -4,12 +4,14 @@
  */
 package com.mycompany.igu.ticket;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.DetailSale;
 import com.mycompany.logic.Product;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +26,7 @@ public class Ticket extends javax.swing.JFrame {
     private User user;
     private Sale sale;
     private List<DetailSale> detailSale;
-
+    private List<Product> products;
     /**
      * Creates new form Ticket
      */
@@ -58,8 +60,16 @@ public class Ticket extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         counter = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableProduct = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setText("Punto de venta");
@@ -125,37 +135,66 @@ public class Ticket extends javax.swing.JFrame {
 
         jLabel3.setText("cantidad:");
 
+        btnSave.setText("Guardar Ticket");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        tableProduct.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tableProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableProduct);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUserLogged, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(86, 86, 86)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(counter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(counter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnDeleteProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnEditProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnDeleteProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnEditProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,11 +220,16 @@ public class Ticket extends javax.swing.JFrame {
                         .addComponent(btnDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,15 +248,17 @@ public class Ticket extends javax.swing.JFrame {
 
     private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
         try {
-            int index = getSelectedFromTable();
-            Object spinner = counter.getValue();
-            int count = Integer.parseInt(String.valueOf(spinner));
-            System.out.println("count " + count);
-            detailSale.get(index).setCount(count);
+            int index = getSelectedFromDetailSaleTable();
+            if(index!=0){
+                Object spinner = counter.getValue();
+                int count = Integer.parseInt(String.valueOf(spinner));
+                detailSale.get(index).setCount(count);            
+            }
         } catch (Exception e) {
             Utils.showMessage(e.getMessage(),"Error", "Error al editar usuario");
         }
-
+        cleanForm();
+        loadTable();
     }//GEN-LAST:event_btnEditProductActionPerformed
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -256,12 +302,15 @@ public class Ticket extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
         // TODO add your handling code here:
-        int index = getSelectedFromTable();
+        int index = getSelectedFromDetailSaleTable();
         detailSale.remove(index);
         loadTable();
     }//GEN-LAST:event_btnDeleteProductActionPerformed
@@ -273,12 +322,41 @@ public class Ticket extends javax.swing.JFrame {
 
     private void tableDetailSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDetailSaleMouseClicked
         // TODO add your handling code here:
-        int index = getSelectedFromTable();
+        int index = getSelectedFromDetailSaleTable();
         if(index != -1){
-            System.out.println("index: " + index);
             counter.setValue(detailSale.get(index).getCount()); 
         }
     }//GEN-LAST:event_tableDetailSaleMouseClicked
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        if(detailSale.size() < 0){
+            return;
+        }
+        Sale sale = new Sale();
+        int total = 0;
+        for(DetailSale ds : detailSale){
+            total = total + (ds.getProduct().getPrice() * ds.getCount());
+        }
+        sale.setDetailSale(detailSale);
+
+        sale.setTotal(total);
+        sale.setIva(total * 0.89);
+        controller.createSale(sale);
+        loadTable();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductMouseClicked
+        // TODO add your handling code here:
+        int index = getSelectedFromProductTable();
+        txtSearch.setText(String.valueOf(products.get(index).getId()));
+        counter.setValue(1);
+    }//GEN-LAST:event_tableProductMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        loadProductTable();
+    }//GEN-LAST:event_formWindowOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -287,13 +365,16 @@ public class Ticket extends javax.swing.JFrame {
     private javax.swing.JButton btnEditProduct;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLoadTable;
+    private javax.swing.JButton btnSave;
     private javax.swing.JSpinner counter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableDetailSale;
+    private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JLabel txtUserLogged;
     // End of variables declaration//GEN-END:variables
@@ -321,15 +402,11 @@ public class Ticket extends javax.swing.JFrame {
         counter.setValue(0);
     }
     
-    private int getSelectedFromTable(){
-        if(tableDetailSale.getRowCount() > 0){
-            if(tableDetailSale.getSelectedRow() != -1){
-                int index = tableDetailSale.getSelectedRow();
-                counter.setValue(detailSale.get(index).getCount());
+    private int getSelectedFromProductTable(){
+        if(tableProduct.getRowCount() > 0){
+            if(tableProduct.getSelectedRow() != -1){
+                int index = tableProduct.getSelectedRow();
                 return index;
-//                Object object = tableDetailSale.getValueAt(tableDetailSale.getSelectedRow(),0);
-//                int productId = Integer.parseInt(String.valueOf(object));
-//                return productId;
           }else{
             Utils.showMessage("Ninguna fila ha sido seleccionada", "Error", "Error");
           }
@@ -337,5 +414,41 @@ public class Ticket extends javax.swing.JFrame {
               Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");          
         }
         return 0;
+    }
+
+
+    private int getSelectedFromDetailSaleTable(){
+        if(tableDetailSale.getRowCount() > 0){
+            if(tableDetailSale.getSelectedRow() != -1){
+                int index = tableDetailSale.getSelectedRow();
+                return index;
+          }else{
+            Utils.showMessage("Ninguna fila ha sido seleccionada", "Error", "Error");
+          }
+        }else{
+              Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");          
+        }
+        return 0;
+    }
+    
+        private void loadProductTable(){
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        String titulos[] = {"Id","Nombre","Precio","Stock"};
+        model.setColumnIdentifiers(titulos);
+
+        products = controller.getProducts();
+        if(products != null){
+            for(Product p : products){
+                Object[] o = new Object[]{p.getId(),p.getName(),p.getPrice(),p.getStock()};
+                model.addRow(o);
+            }
+        }
+        tableProduct.setModel(model);
     }
 }

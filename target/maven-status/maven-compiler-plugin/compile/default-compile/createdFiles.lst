@@ -11,10 +11,12 @@ com\mycompany\igu\ticket\Ticket$5.class
 com\mycompany\igu\Login.class
 com\mycompany\igu\Subcategory\SubcategoryCreate$3.class
 com\mycompany\persistance\ProviderJpaController.class
+com\mycompany\igu\home\admin\HomeAdmin$6.class
 com\mycompany\logic\DetailSale_.class
 com\mycompany\persistance\CategoryJpaController.class
 com\mycompany\igu\Product\CreateProduct$2.class
 com\mycompany\igu\Product\EditProduct$5.class
+com\mycompany\igu\home\admin\HomeAdmin.class
 com\mycompany\persistance\exceptions\IllegalOrphanException.class
 com\mycompany\logic\Sale_.class
 com\mycompany\igu\User\UserView$1.class
@@ -37,6 +39,7 @@ com\mycompany\igu\Category\CategoryView$7.class
 com\mycompany\igu\Product\ProductView$2.class
 com\mycompany\igu\Product\CreateProduct.class
 com\mycompany\igu\Sale\DetailSaleAdmin$2.class
+com\mycompany\igu\ticket\Ticket$8.class
 com\mycompany\igu\Subcategory\SubcategoryView$2.class
 com\mycompany\igu\Product\ProductView.class
 com\mycompany\igu\Subcategory\SubcategoryCreate.class
@@ -50,7 +53,10 @@ com\mycompany\igu\Sale\SaleViewAdmin$3.class
 com\mycompany\igu\Category\CreateCategory.class
 com\mycompany\igu\Main$4.class
 com\mycompany\igu\Product\EditProduct$3.class
+com\mycompany\igu\home\admin\HomeAdmin$4.class
 com\mycompany\igu\Subcategory\SubcategoryView$6.class
+com\mycompany\igu\ticket\Ticket$11.class
+com\mycompany\igu\home\admin\HomeAdmin$3.class
 com\mycompany\igu\Category\CategoryView$2.class
 com\mycompany\igu\Sale\DetailSaleAdmin$3.class
 com\mycompany\logic\Product_.class
@@ -70,13 +76,16 @@ com\mycompany\persistance\UserJpaController.class
 com\mycompany\logic\Provider_.class
 com\mycompany\logic\Sale.class
 com\mycompany\igu\Main$3.class
+com\mycompany\igu\ticket\Ticket$10.class
 com\mycompany\igu\Product\EditProduct$1.class
 com\mycompany\logic\Subcategory.class
 com\mycompany\igu\Category\CategoryView.class
 com\mycompany\logic\Rol_.class
 com\mycompany\igu\Product\ProductView$3.class
+com\mycompany\igu\ticket\Ticket$9.class
 com\mycompany\persistance\RolJpaController.class
 com\mycompany\igu\Sale\DetailSaleAdmin$4.class
+com\mycompany\igu\home\admin\HomeAdmin$2.class
 com\mycompany\igu\User\UserViewAdmin$2.class
 com\mycompany\igu\Subcategory\SubcategoryEdit$3.class
 com\mycompany\igu\Category\CategoryView$6.class
@@ -99,6 +108,7 @@ com\mycompany\igu\Product\CreateProduct$6.class
 com\mycompany\igu\Product\CreateProduct$3.class
 com\mycompany\logic\Provider.class
 com\mycompany\igu\Category\EditCategory.class
+com\mycompany\igu\home\admin\HomeAdmin$5.class
 com\mycompany\igu\Sale\SaleViewAdmin$4.class
 com\mycompany\igu\User\UserViewAdmin.class
 com\mycompany\logic\Subcategory_.class
@@ -112,6 +122,7 @@ com\mycompany\igu\Main$1.class
 com\mycompany\igu\Category\CategoryView$5.class
 com\mycompany\igu\ticket\Ticket$4.class
 com\mycompany\igu\User\EditUser$3.class
+com\mycompany\igu\home\admin\HomeAdmin$1.class
 com\mycompany\igu\Product\ProductView$1.class
 com\mycompany\igu\User\createUser$1.class
 com\mycompany\igu\Subcategory\SubcategoryCreate$2.class

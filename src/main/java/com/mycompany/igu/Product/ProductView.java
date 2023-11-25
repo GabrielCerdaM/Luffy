@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu.Product;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.Product;
 import com.mycompany.logic.User;
@@ -193,6 +194,9 @@ public class ProductView extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 

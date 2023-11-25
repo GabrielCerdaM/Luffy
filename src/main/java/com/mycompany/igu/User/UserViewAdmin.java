@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu.User;
 
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.igu.User.createUser;
 import com.mycompany.igu.User.EditUser;
 import com.mycompany.logic.Controller;
@@ -195,8 +196,7 @@ public class UserViewAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateUserActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        goToHomeView();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
@@ -267,4 +267,11 @@ public class UserViewAdmin extends javax.swing.JFrame {
     private javax.swing.JTable tableUser;
     private javax.swing.JLabel txtUserLogged;
     // End of variables declaration//GEN-END:variables
+
+    private void goToHomeView() {
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
+        this.dispose();
+    }
 }
