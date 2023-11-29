@@ -9,6 +9,8 @@ import com.mycompany.logic.Controller;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -180,7 +182,13 @@ public class SaleViewAdmin extends javax.swing.JFrame {
 
         List<Sale> sales = controller.getSales();
         for(Sale sale: sales){
-            Object[] o = new Object[]{sale.getId(),sale.getTotal()};
+            LocalDateTime created_at = sale.getCreatedAt();
+            
+            DateTimeFormatter isoDate = DateTimeFormatter.ISO_LOCAL_DATE;
+            DateTimeFormatter isoHour = DateTimeFormatter.ISO_LOCAL_TIME;
+            String date = created_at.format(isoDate);
+            String hour = created_at.format(isoHour);
+            Object[] o = new Object[]{sale.getId(),date,hour,sale.getTotal()};
             model.addRow(o);
         }
         

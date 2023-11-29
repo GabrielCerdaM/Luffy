@@ -1,3 +1,4 @@
+C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\provider\EditProvider.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\ticket\Ticket.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\home\admin\HomeAdmin.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Sale.java
@@ -11,12 +12,14 @@ C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\ig
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Sale\DetailSaleAdmin.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Product\EditProduct.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Category\CategoryView.java
+C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\provider\ProviderView.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\User\UserViewAdmin.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\DetailSaleJpaController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\PersistanceController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\exceptions\PreexistingEntityException.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\SaleJpaController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Product.java
+C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\home\admin\Home.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\UserJpaController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Subcategory.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Sale\SaleViewAdmin.java
@@ -39,3 +42,4 @@ C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\lo
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\User.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\utils\Utils.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Product\ProductView.java
+C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\provider\CreateProvider.java
