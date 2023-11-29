@@ -142,6 +142,9 @@ public class DetailSaleAdmin extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        SaleViewAdmin view = new SaleViewAdmin(controller, user);
+        view.setVisible(true);
+        view.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 

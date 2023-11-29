@@ -19,6 +19,7 @@ com\mycompany\persistance\CategoryJpaController.class
 com\mycompany\igu\Product\CreateProduct$2.class
 com\mycompany\igu\Product\EditProduct$5.class
 com\mycompany\igu\provider\CreateProvider.class
+com\mycompany\igu\Sale\SaleViewAdmin$5.class
 com\mycompany\igu\home\admin\HomeAdmin.class
 com\mycompany\persistance\exceptions\IllegalOrphanException.class
 com\mycompany\logic\Sale_.class
@@ -51,6 +52,7 @@ com\mycompany\igu\provider\CreateProvider$2.class
 com\mycompany\igu\Subcategory\SubcategoryCreate.class
 com\mycompany\igu\Category\CreateCategory$1.class
 com\mycompany\igu\ticket\Ticket$7.class
+com\mycompany\igu\User\createUser$4.class
 com\mycompany\igu\Category\CategoryView$1.class
 com\mycompany\igu\Product\ProductView$5.class
 com\mycompany\logic\DetailSale.class
@@ -162,6 +164,7 @@ com\mycompany\persistance\ProductJpaController.class
 com\mycompany\igu\Product\ProductView$7.class
 com\mycompany\igu\User\UserViewAdmin$3.class
 com\mycompany\igu\Product\EditProduct.class
+com\mycompany\igu\User\EditUser$4.class
 com\mycompany\igu\Product\ProductView$10.class
 com\mycompany\logic\Category.class
 com\mycompany\igu\ticket\Ticket$3.class

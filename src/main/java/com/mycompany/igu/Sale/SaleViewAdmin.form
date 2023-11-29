@@ -53,8 +53,9 @@
                           <Component id="jScrollPane6" min="-2" pref="715" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btnLoadTable5" alignment="1" min="-2" pref="238" max="-2" attributes="0"/>
-                              <Component id="btnExit5" alignment="1" min="-2" pref="238" max="-2" attributes="0"/>
+                              <Component id="btnDetailSaleView" alignment="1" min="-2" pref="238" max="-2" attributes="0"/>
+                              <Component id="btnExit" alignment="1" min="-2" pref="238" max="-2" attributes="0"/>
+                              <Component id="btnLoadTable1" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -72,14 +73,15 @@
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
-                          <Component id="btnLoadTable5" min="-2" pref="61" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="btnDetailSaleView" min="-2" pref="61" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                          <Component id="btnLoadTable1" min="-2" pref="61" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnExit5" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="btnExit" min="-2" pref="60" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane6" alignment="0" pref="395" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" pref="395" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
@@ -95,20 +97,20 @@
             <Property name="text" type="java.lang.String" value="Sistema administrador de Ventas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnExit5">
+        <Component class="javax.swing.JButton" name="btnExit">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExit5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLoadTable5">
+        <Component class="javax.swing.JButton" name="btnDetailSaleView">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Recarga tabla"/>
+            <Property name="text" type="java.lang.String" value="Ver Detalle"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadTable5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDetailSaleViewActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane6">
@@ -133,6 +135,14 @@
               <Font name="Arial" size="24" style="1"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnLoadTable1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Recarga tabla"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadTable1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
