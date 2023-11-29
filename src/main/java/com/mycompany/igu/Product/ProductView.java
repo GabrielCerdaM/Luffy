@@ -247,7 +247,6 @@ public class ProductView extends javax.swing.JFrame {
             EditProduct editView = new EditProduct(controller,user, productId);
             editView.setVisible(true);
             editView.setLocationRelativeTo(null);
-            this.dispose();
         }
     }//GEN-LAST:event_btnEditProductActionPerformed
 
@@ -256,7 +255,6 @@ public class ProductView extends javax.swing.JFrame {
         CreateProduct productView = new CreateProduct(controller, user);
         productView.setVisible(true);
         productView.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnCreateProductActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -264,7 +262,6 @@ public class ProductView extends javax.swing.JFrame {
         HomeAdmin hView = new HomeAdmin(controller, user);
         hView.setVisible(true);
         hView.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed

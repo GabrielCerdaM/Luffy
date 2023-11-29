@@ -62,6 +62,7 @@ com\mycompany\igu\Main$4.class
 com\mycompany\igu\Product\EditProduct$3.class
 com\mycompany\igu\provider\EditProvider$3.class
 com\mycompany\igu\home\admin\HomeAdmin$4.class
+com\mycompany\igu\Product\CreateProduct$7.class
 com\mycompany\igu\Subcategory\SubcategoryView$6.class
 com\mycompany\igu\ticket\Ticket$11.class
 com\mycompany\igu\home\admin\HomeAdmin$3.class
@@ -149,6 +150,7 @@ com\mycompany\igu\User\createUser$1.class
 com\mycompany\igu\Subcategory\SubcategoryCreate$2.class
 com\mycompany\igu\provider\EditProvider.class
 com\mycompany\igu\User\UserViewAdmin$4.class
+com\mycompany\igu\Product\EditProduct$7.class
 com\mycompany\igu\Main.class
 com\mycompany\igu\provider\ProviderView$4.class
 com\mycompany\igu\Subcategory\SubcategoryEdit$1.class
