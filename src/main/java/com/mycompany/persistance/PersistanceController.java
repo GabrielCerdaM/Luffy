@@ -14,11 +14,14 @@ import com.mycompany.logic.Subcategory;
 import com.mycompany.logic.User;
 import com.mycompany.persistance.exceptions.NonexistentEntityException;
 import com.mycompany.utils.Utils;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -107,6 +110,15 @@ public class PersistanceController {
         cq.select(subcategory).where(cb.equal(subcategory.get("category").get("id"), categoryId));
         return subcategoryJpa.getEntityManager().createQuery(cq).getResultList();
     }    
+    
+    public List<Product> getProductBy(int subcategoryId){
+        CriteriaBuilder cb = productJpa.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+        Root<Product> product = cq.from(Product.class);
+        
+        cq.select(product).where(cb.equal(product.get("subcategory").get("id"), subcategoryId));
+        return subcategoryJpa.getEntityManager().createQuery(cq).getResultList();
+    }
 
     public void createSubcategory(Subcategory sc) {
         subcategoryJpa.create(sc);
@@ -168,6 +180,62 @@ public class PersistanceController {
 
     public void createSale(Sale sale) {
         saleJpa.create(sale);
+    }
+
+    public void createProvider(Provider p) {
+        providerJpa.create(p);
+    }
+    
+    public List<Product> getFilterProducts(String search, String categoryName, String subcategoryName, String providerName) {
+        System.out.println(""+categoryName);
+        System.out.println(""+subcategoryName);
+        System.out.println(""+providerName);
+
+        CriteriaBuilder cb = productJpa.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+        Root<Product> product = cq.from(Product.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if(search != null && !search.isEmpty()){
+            Predicate predicateOr = cb.or(
+                    cb.equal(product.get("name"), search)
+            );
+            predicates.add(predicateOr);
+        }
+        
+        // Filtrar por subcategoría
+        if (subcategoryName != null && !subcategoryName.isEmpty()) {
+            System.out.println("subcategory filter");
+            Join<Product, Subcategory> subcategoryJoin = product.join("subcategory");
+            predicates.add(cb.equal(subcategoryJoin.get("name"), subcategoryName));
+        }else{
+        // Filtrar por categoría
+            System.out.println("!null "+categoryName != null );
+            System.out.println("!isEmpty "+!categoryName.isEmpty());
+            if (categoryName != null && !categoryName.isEmpty()) {
+                System.out.println("category filter");
+                Join<Product, Subcategory> subcategoryJoin = product.join("subcategory");
+                Join<Subcategory, Category> categoryJoin = subcategoryJoin.join("category");
+                predicates.add(cb.equal(categoryJoin.get("name"), categoryName));
+            }
+        
+        }
+
+        // Filtrar por proveedor
+        if (providerName != null && !providerName.isEmpty()) {
+            System.out.println("provider filter");
+            Join<Product, Provider> providerJoin = product.join("provider");
+            predicates.add(cb.equal(providerJoin.get("name"), providerName));
+        }
+        // el error esta aca
+//        Predicate[] predArray = new Predicate[predicates.size()];
+//        predicates.toArray(predArray);
+        System.out.println("predicates"+predicates.toString());
+        cq.where(predicates.toArray(new Predicate[0]));
+//        cq.where(predArray);
+
+        return productJpa.getEntityManager().createQuery(cq).getResultList();
     }
 
 }

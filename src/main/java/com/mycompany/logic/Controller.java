@@ -293,4 +293,33 @@ public class Controller {
         persistanceController.createSale(sale);
     }
 
+    public void createProvider(String name, String description, String phone, String address) {
+        Provider p = new Provider();
+        int idLastProvider = getIdLastProvider() + 1;
+        p.setId(idLastProvider);
+        p.setName(name);
+        p.setDescription(description);
+        p.setPhone(phone);
+        p.setAddress(address);
+        persistanceController.createProvider(p);
+    }
+
+    private int getIdLastProvider() {
+        List<Provider> providers = getProviders();
+        int size = providers.size() - 1;
+        if(size == -1){
+            return 0;
+        }
+        Provider p = providers.get(size);
+        return p.getId();
+    }
+    
+    private List<Product> getProductBy(int subcategoryId){
+        return persistanceController.getProductBy(subcategoryId);
+    }
+    
+    public List<Product> getProductFiltered(String search,String categoryName,String subcategoryName,String providerName){
+        return persistanceController.getFilterProducts(search, categoryName, subcategoryName, providerName);
+    }
+
 }
