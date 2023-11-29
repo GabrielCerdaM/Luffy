@@ -90,6 +90,16 @@ public class Controller {
         return user.getId();
     }
 
+    public int getLastClientId(){
+        List<Client> c = getClients();
+        int size = c.size()-1;
+        if(size == -1){
+            return 0;
+        }
+        Client client = c.get(size);        
+        return client.getId();
+    }
+    
     public int getLastCategoryId(){
         List<Category> categories = getCategories();
         int size = categories.size()-1;
@@ -320,6 +330,20 @@ public class Controller {
     
     public List<Product> getProductFiltered(String search,String categoryName,String subcategoryName,String providerName){
         return persistanceController.getFilterProducts(search, categoryName, subcategoryName, providerName);
+    }
+
+    public List<Client> getClients() {
+        return persistanceController.getClients();
+    }
+
+    public Client getClientById(int clientId) {
+        return persistanceController.getClientById(clientId);
+    }
+
+    public void createClient(String name, String phone, String email, String address) {
+        int id = getLastClientId();
+        Client c = new Client(id + 1, name, phone, email, address);
+        persistanceController.createClient(c);
     }
 
 }

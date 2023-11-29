@@ -239,7 +239,7 @@ public class SubcategoryView extends javax.swing.JFrame {
             }
         };
         
-        String titulos[] = {"Id","Usuario","Rol"};
+        String titulos[] = {"Id","nombre","descripcion","categoria"};
         model.setColumnIdentifiers(titulos);
         List<Subcategory> subcategories = controller.getSubcategories();
         if(subcategories != null){

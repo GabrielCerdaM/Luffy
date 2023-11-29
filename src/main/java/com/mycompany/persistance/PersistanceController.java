@@ -5,6 +5,7 @@
 package com.mycompany.persistance;
 
 import com.mycompany.logic.Category;
+import com.mycompany.logic.Client;
 import com.mycompany.logic.DetailSale;
 import com.mycompany.logic.Product;
 import com.mycompany.logic.Provider;
@@ -39,7 +40,8 @@ public class PersistanceController {
     SubcategoryJpaController subcategoryJpa =  new SubcategoryJpaController();
     ProductJpaController productJpa = new ProductJpaController();
     DetailSaleJpaController detailSaleJpa = new DetailSaleJpaController();
-
+    ClientJpaController clientJpa = new ClientJpaController();
+    
     public List<User> getUsers() {
         return userJpa.findUserEntities();
     }
@@ -236,6 +238,18 @@ public class PersistanceController {
 //        cq.where(predArray);
 
         return productJpa.getEntityManager().createQuery(cq).getResultList();
+    }
+
+    public List<Client> getClients() {
+        return clientJpa.findClientEntities();
+    }
+
+    public Client getClientById(int clientId) {
+        return clientJpa.findClient(clientId);
+    }
+
+    public void createClient(Client c) {
+        clientJpa.create(c);
     }
 
 }

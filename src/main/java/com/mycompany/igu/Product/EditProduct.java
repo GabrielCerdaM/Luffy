@@ -217,10 +217,6 @@ public class EditProduct extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         product = controller.getProduct(productId);
@@ -230,19 +226,20 @@ public class EditProduct extends javax.swing.JFrame {
         loadComboBoxes();
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        txtName.setText("");
-        txtPrice.setText("");
-        txtStock.setText("");
-        loadComboBoxes();
-    }//GEN-LAST:event_btnCleanActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+
+    }//GEN-LAST:event_txtStockActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(cmbCategory.getSelectedIndex() != 0 &&
-                cmbSubcategory.getSelectedIndex() != 0 &&
-                cmbProvider.getSelectedIndex() != 0){
+            cmbSubcategory.getSelectedIndex() != 0 &&
+            cmbProvider.getSelectedIndex() != 0){
             String category = (String)cmbCategory.getSelectedItem();
             String subcategory = (String)cmbSubcategory.getSelectedItem();
             String provider = (String)cmbProvider.getSelectedItem();
@@ -263,9 +260,17 @@ public class EditProduct extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+        // TODO add your handling code here:
+        txtName.setText("");
+        txtPrice.setText("");
+        txtStock.setText("");
+        loadComboBoxes();
+    }//GEN-LAST:event_btnCleanActionPerformed
 
-    }//GEN-LAST:event_txtStockActionPerformed
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
 
     private void cmbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoryActionPerformed
         // TODO add your handling code here:
@@ -279,11 +284,6 @@ public class EditProduct extends javax.swing.JFrame {
             loadSubcategories(category.getId());
         }
     }//GEN-LAST:event_cmbCategoryActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnExitActionPerformed
 
 
     
