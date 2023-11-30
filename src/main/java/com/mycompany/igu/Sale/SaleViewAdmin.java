@@ -9,9 +9,11 @@ import com.mycompany.logic.Controller;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -208,10 +210,10 @@ public class SaleViewAdmin extends javax.swing.JFrame {
             LocalDateTime created_at = sale.getCreatedAt();
             
             DateTimeFormatter isoDate = DateTimeFormatter.ISO_LOCAL_DATE;
-            DateTimeFormatter isoHour = DateTimeFormatter.ISO_LOCAL_TIME;
+            DateTimeFormatter isoHour = DateTimeFormatter.ofPattern("HH:mm:ss");
             String date = created_at.format(isoDate);
             String hour = created_at.format(isoHour);
-            Object[] o = new Object[]{sale.getId(),date,hour,sale.getTotal()};
+            Object[] o = new Object[]{sale.getId(),date,hour,formatPrice(sale.getTotal())};
             model.addRow(o);
         }
         
@@ -232,5 +234,15 @@ public class SaleViewAdmin extends javax.swing.JFrame {
               Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");          
         }
         return 0;
+    }
+
+    private String formatPrice(int price) {
+        try {
+            NumberFormat formatoPrecio = NumberFormat.getCurrencyInstance(Locale.getDefault());
+            String precioFormateado = formatoPrecio.format(price);
+            return precioFormateado;
+        } catch (NumberFormatException e) {
+            return String.valueOf(price);
+        }
     }
 }
