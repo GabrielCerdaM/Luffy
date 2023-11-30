@@ -249,10 +249,14 @@ public class Ticket extends javax.swing.JFrame {
     private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
         try {
             int index = getSelectedFromDetailSaleTable();
-            if(index!=0){
+            System.out.println("index " + index);
+            if(index!= -1){
                 Object spinner = counter.getValue();
                 int count = Integer.parseInt(String.valueOf(spinner));
+                System.out.println("count" + count);
                 detailSale.get(index).setCount(count);            
+            }else{
+                System.out.println("index 0");
             }
         } catch (Exception e) {
             Utils.showMessage(e.getMessage(),"Error", "Error al editar usuario");
