@@ -4,6 +4,7 @@
  */
 package com.mycompany.igu.provider;
 
+import com.mycompany.igu.Category.CreateCategory;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.Provider;
 import com.mycompany.logic.Sale;
@@ -189,17 +190,13 @@ public class ProviderView extends javax.swing.JFrame {
 
     private void btnCreateProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateProviderActionPerformed
         // TODO add your handling code here:
-//        CreateCategory createView = new CreateCategory(controller, user);
-//        createView.setVisible(true);
-//        createView.setLocationRelativeTo(null);
+        CreateCategory createView = new CreateCategory(controller, user);
+        createView.setVisible(true);
+        createView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnCreateProviderActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-//        HomeAdmin hView = new HomeAdmin(controller, user);
-//        hView.setVisible(true);
-//        hView.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
