@@ -161,10 +161,14 @@ public class SaleViewAdmin extends javax.swing.JFrame {
     private void btnDetailSaleViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSaleViewActionPerformed
         // TODO add your handling code here:
         int saleId = getSelectedFromTable();
-        DetailSaleAdmin view = new DetailSaleAdmin(controller, user, saleId);
-        view.setVisible(true);
-        view.setLocationRelativeTo(null);
-        this.dispose();
+        if(saleId > 0){
+            DetailSaleAdmin view = new DetailSaleAdmin(controller, user, saleId);
+            view.setVisible(true);
+            view.setLocationRelativeTo(null);
+            this.dispose();            
+        }else{
+            Utils.showMessage("Es necesario seleccionar una venta para ver su detalle", "Error", "No se ha seleccionado ninguna venta");
+        }
     }//GEN-LAST:event_btnDetailSaleViewActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

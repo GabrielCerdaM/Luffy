@@ -297,9 +297,32 @@ public class Controller {
         return persistanceController.getDetailSale(saleId);
     }
 
-    public void createSale(Sale sale) {
+//    public void createSale(Sale sale) {
+//        int lastSaleId = getLastSaleId();
+//        System.out.println("lastSaleId "+lastSaleId);
+//        sale.setId(lastSaleId + 1);
+//        persistanceController.createSale(sale);
+//    }
+    
+    public void createSale(List<DetailSale> list) {
         int lastSaleId = getLastSaleId();
+        int lastDetailId = getLastDetailId();
+
+        int total = 0;
+
+        Sale sale = new Sale();
         sale.setId(lastSaleId + 1);
+        System.out.println("sale id: " + sale.getId());
+        for(int i=0;i<list.size();i++){
+            list.get(i).setSale(sale);
+            int counter = i + 1;
+            list.get(i).setId(lastDetailId + counter);
+            total = total + (list.get(i).getProduct().getPrice() * list.get(i).getCount());
+        }
+
+        sale.setDetailSale(list);
+        sale.setTotal(total);
+        sale.setIva(total * 0.89);
         persistanceController.createSale(sale);
     }
 
@@ -344,6 +367,16 @@ public class Controller {
         int id = getLastClientId();
         Client c = new Client(id + 1, name, phone, email, address);
         persistanceController.createClient(c);
+    }
+
+    public int getLastDetailId() {
+        List<DetailSale> list = persistanceController.getAllDetailSale();
+        int size = list.size() - 1;
+        if(size == -1){
+            return 0;
+        }
+        DetailSale d = list.get(size);
+        return d.getId();
     }
 
 }

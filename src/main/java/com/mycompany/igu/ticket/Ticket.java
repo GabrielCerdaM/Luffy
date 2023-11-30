@@ -331,18 +331,11 @@ public class Ticket extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(detailSale.size() < 0){
+            Utils.showMessage("No hay productos seleccinados como para generar un ticket", "Error", "Productos sin seleccionar");
             return;
         }
-        Sale sale = new Sale();
-        int total = 0;
-        for(DetailSale ds : detailSale){
-            total = total + (ds.getProduct().getPrice() * ds.getCount());
-        }
-        sale.setDetailSale(detailSale);
-
-        sale.setTotal(total);
-        sale.setIva(total * 0.89);
-        controller.createSale(sale);
+        controller.createSale(detailSale);
+        Utils.showMessage("ticket creado", "Info", "Ticket creado");
         loadTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
