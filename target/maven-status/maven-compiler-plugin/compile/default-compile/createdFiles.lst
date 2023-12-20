@@ -22,6 +22,7 @@ com\mycompany\igu\Subcategory\SubcategoryEdit$2.class
 com\mycompany\igu\Subcategory\SubcategoryView$5.class
 com\mycompany\persistance\SubcategoryJpaController.class
 com\mycompany\igu\home\admin\Home$1.class
+com\mycompany\persistance\PaymentJpaController.class
 com\mycompany\igu\Sale\DetailSaleAdmin$2.class
 com\mycompany\igu\provider\CreateProvider$2.class
 com\mycompany\igu\Client\ClientAdminView$5.class
@@ -47,6 +48,7 @@ com\mycompany\igu\Product\EditProduct$4.class
 com\mycompany\igu\Product\CreateProduct$1.class
 com\mycompany\igu\User\UserView$3.class
 com\mycompany\igu\Subcategory\SubcategoryView.class
+com\mycompany\igu\ticket\Ticket$12.class
 com\mycompany\persistance\UserJpaController.class
 com\mycompany\igu\Client\CreateClient$5.class
 com\mycompany\igu\provider\ProviderView$7.class
@@ -66,6 +68,7 @@ com\mycompany\igu\Client\CreateClient$3.class
 com\mycompany\igu\Main$2.class
 com\mycompany\igu\Client\EditClient$3.class
 com\mycompany\igu\home\admin\HomeAdmin$8.class
+com\mycompany\igu\exceptions\IllegalOrphanException.class
 com\mycompany\igu\Sale\DetailSaleAdmin.class
 com\mycompany\logic\Category_.class
 com\mycompany\igu\Product\CreateProduct$6.class
@@ -75,6 +78,7 @@ com\mycompany\igu\home\admin\HomeAdmin$5.class
 com\mycompany\igu\Sale\SaleViewAdmin$4.class
 com\mycompany\igu\provider\EditProvider$4.class
 com\mycompany\igu\User\UserViewAdmin.class
+com\mycompany\igu\exceptions\PreexistingEntityException.class
 com\mycompany\logic\Subcategory_.class
 com\mycompany\igu\Product\CreateProduct$4.class
 com\mycompany\igu\Subcategory\SubcategoryView$3.class
@@ -87,6 +91,7 @@ com\mycompany\igu\provider\CreateProvider$1.class
 com\mycompany\igu\Product\ProductView$1.class
 com\mycompany\igu\User\createUser$1.class
 com\mycompany\igu\Subcategory\SubcategoryCreate$2.class
+com\mycompany\persistance\DocumentJpaController.class
 com\mycompany\igu\provider\EditProvider.class
 com\mycompany\igu\Client\CreateClient$1.class
 com\mycompany\igu\Product\EditProduct$7.class
@@ -124,6 +129,7 @@ com\mycompany\igu\Category\CategoryView$7.class
 com\mycompany\igu\Product\ProductView$2.class
 com\mycompany\igu\Product\CreateProduct.class
 com\mycompany\igu\ticket\Ticket$8.class
+com\mycompany\logic\Payment_.class
 com\mycompany\igu\Subcategory\SubcategoryView$2.class
 com\mycompany\igu\Product\ProductView.class
 com\mycompany\igu\Subcategory\SubcategoryCreate.class
@@ -134,6 +140,7 @@ com\mycompany\igu\User\createUser$4.class
 com\mycompany\igu\Category\CategoryView$1.class
 com\mycompany\logic\DetailSale.class
 com\mycompany\igu\User\UserViewAdmin$1.class
+com\mycompany\igu\exceptions\NonexistentEntityException.class
 com\mycompany\igu\provider\ProviderView$6.class
 com\mycompany\igu\Category\CreateCategory.class
 com\mycompany\igu\Client\CreateClient.class
@@ -165,6 +172,7 @@ com\mycompany\igu\provider\ProviderView$1.class
 com\mycompany\igu\User\UserViewAdmin$2.class
 com\mycompany\igu\Subcategory\SubcategoryEdit$3.class
 com\mycompany\igu\Category\CategoryView$6.class
+com\mycompany\logic\Document_.class
 com\mycompany\igu\Category\EditCategory$3.class
 com\mycompany\igu\Category\CategoryView$3.class
 com\mycompany\igu\Product\ProductView$6.class
@@ -186,10 +194,12 @@ com\mycompany\igu\ticket\Ticket$4.class
 com\mycompany\igu\Client\EditClient$7.class
 com\mycompany\igu\User\EditUser$3.class
 com\mycompany\igu\home\admin\HomeAdmin$1.class
+com\mycompany\logic\Payment.class
 com\mycompany\igu\Client\ClientAdminView$1.class
 com\mycompany\igu\User\UserViewAdmin$4.class
 com\mycompany\igu\Main.class
 com\mycompany\igu\provider\ProviderView$4.class
+com\mycompany\logic\Document.class
 com\mycompany\igu\Subcategory\SubcategoryEdit$1.class
 com\mycompany\igu\Category\EditCategory$1.class
 com\mycompany\persistance\ProductJpaController.class

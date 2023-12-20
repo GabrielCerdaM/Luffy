@@ -6,7 +6,6 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class DetailSale implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int count;
+    private int quantity;
     private int total;
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -48,13 +47,12 @@ public class DetailSale implements Serializable {
             createdAt = LocalDateTime.now();
         }
     }
-    
-    public DetailSale() {
+        public DetailSale() {
     }
 
-    public DetailSale(int id, int count, int total, Product product, Sale sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public DetailSale(int id, int quantity, int total, Product product, Sale sale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.count = count;
+        this.quantity = quantity;
         this.total = total;
         this.product = product;
         this.sale = sale;
@@ -71,12 +69,12 @@ public class DetailSale implements Serializable {
         this.id = id;
     }
 
-    public int getCount() {
-        return count;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getTotal() {
@@ -126,6 +124,5 @@ public class DetailSale implements Serializable {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-
 
 }

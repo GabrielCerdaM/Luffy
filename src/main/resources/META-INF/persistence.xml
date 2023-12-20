@@ -11,6 +11,8 @@
     <class>com.mycompany.logic.DetailSale</class>
     <class>com.mycompany.logic.Product</class>
     <class>com.mycompany.logic.Client</class>
+    <class>com.mycompany.logic.Document</class>
+    <class>com.mycompany.logic.Payment</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa?serverTimeZone=UTF"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

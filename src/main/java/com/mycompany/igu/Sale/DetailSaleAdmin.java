@@ -172,7 +172,7 @@ public class DetailSaleAdmin extends javax.swing.JFrame {
 
         List<DetailSale> detailSale = controller.getDetailSale(saleId);
         for(DetailSale dSale: detailSale){
-            Object[] o = new Object[]{dSale.getId(),dSale.getProduct().getName(),dSale.getCount(),dSale.getTotal()};
+            Object[] o = new Object[]{dSale.getId(),dSale.getProduct().getName(),dSale.getQuantity(),dSale.getTotal()};
             model.addRow(o);
         }
         

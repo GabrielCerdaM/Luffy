@@ -5,6 +5,7 @@
 package com.mycompany.igu.provider;
 
 import com.mycompany.igu.Category.CreateCategory;
+import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.Provider;
 import com.mycompany.logic.Sale;
@@ -197,7 +198,7 @@ public class ProviderView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateProviderActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        goToHomeView();        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProviderActionPerformed
@@ -267,5 +268,12 @@ public class ProviderView extends javax.swing.JFrame {
               Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");          
         }
         return 0;
+    }
+    
+    private void goToHomeView() {
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
+        this.dispose();
     }
 }

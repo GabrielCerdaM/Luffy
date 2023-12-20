@@ -6,7 +6,6 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,10 +25,19 @@ public class Sale implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private boolean payment_status;
     private int total;
     private double iva;
+
     @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
     private List<DetailSale> detailSale;
+
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
+    private List<Payment> payment;
+
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
+    private List<Document> document;
+
     @Column(name = "created_at" ,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
@@ -45,14 +53,18 @@ public class Sale implements Serializable {
             createdAt = LocalDateTime.now();
         }
     }
+
     public Sale() {
     }
 
-    public Sale(int id, int total, double iva, List<DetailSale> detailSale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Sale(int id, boolean payment_status, int total, double iva, List<DetailSale> detailSale, List<Payment> payment, List<Document> document, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
+        this.payment_status = payment_status;
         this.total = total;
         this.iva = iva;
         this.detailSale = detailSale;
+        this.payment = payment;
+        this.document = document;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -64,6 +76,14 @@ public class Sale implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isPayment_status() {
+        return payment_status;
+    }
+
+    public void setPayment_status(boolean payment_status) {
+        this.payment_status = payment_status;
     }
 
     public int getTotal() {
@@ -90,6 +110,22 @@ public class Sale implements Serializable {
         this.detailSale = detailSale;
     }
 
+    public List<Payment> getPayment() {
+        return payment;
+    }
+
+    public void setPayment(List<Payment> payment) {
+        this.payment = payment;
+    }
+
+    public List<Document> getDocument() {
+        return document;
+    }
+
+    public void setDocument(List<Document> document) {
+        this.document = document;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -113,6 +149,5 @@ public class Sale implements Serializable {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
- 
-
+    
 }

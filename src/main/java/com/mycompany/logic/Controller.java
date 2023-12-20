@@ -315,9 +315,9 @@ public class Controller {
         System.out.println("sale id: " + sale.getId());
         for(int i=0;i<list.size();i++){
             list.get(i).setSale(sale);
-            int counter = i + 1;
-            list.get(i).setId(lastDetailId + counter);
-            total = total + (list.get(i).getProduct().getPrice() * list.get(i).getCount());
+            int quantity = i + 1;
+            list.get(i).setId(lastDetailId + quantity);
+            total = total + (list.get(i).getProduct().getPrice() * list.get(i).getQuantity());
         }
 
         sale.setDetailSale(list);

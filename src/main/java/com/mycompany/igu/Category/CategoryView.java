@@ -266,4 +266,5 @@ public class CategoryView extends javax.swing.JFrame {
     private javax.swing.JTable tableCategory;
     private javax.swing.JLabel txtUserLogged1;
     // End of variables declaration//GEN-END:variables
+
 }

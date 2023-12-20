@@ -259,9 +259,7 @@ public class ProductView extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        HomeAdmin hView = new HomeAdmin(controller, user);
-        hView.setVisible(true);
-        hView.setLocationRelativeTo(null);
+        goToHomeView();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
@@ -459,5 +457,12 @@ public class ProductView extends javax.swing.JFrame {
             }        
         }
 
+    }
+    
+    private void goToHomeView() {
+        HomeAdmin hView = new HomeAdmin(controller, user);
+        hView.setVisible(true);
+        hView.setLocationRelativeTo(null);
+        this.dispose();
     }
 }
