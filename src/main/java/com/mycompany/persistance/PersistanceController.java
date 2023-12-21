@@ -244,6 +244,16 @@ public class PersistanceController {
         return clientJpa.findClientEntities();
     }
 
+    public List<Client> getClients(String search) {
+        System.out.println("search: "+search);
+        CriteriaBuilder cb = clientJpa.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> client = cq.from(Client.class);
+        Predicate p = cb.like(client.get("name"),"%"+search+"%");
+        cq.where(p);
+        return clientJpa.getEntityManager().createQuery(cq).getResultList();
+    }
+    
     public Client getClientById(int clientId) {
         return clientJpa.findClient(clientId);
     }

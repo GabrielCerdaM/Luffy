@@ -59,6 +59,7 @@ com\mycompany\igu\Product\ProductView$3.class
 com\mycompany\igu\ticket\Ticket$9.class
 com\mycompany\igu\provider\ProviderView.class
 com\mycompany\igu\home\admin\Home$2.class
+com\mycompany\igu\ticket\Ticket$13.class
 com\mycompany\igu\Category\CreateCategory$3.class
 com\mycompany\igu\Subcategory\SubcategoryView$1.class
 com\mycompany\igu\User\UserView$2.class

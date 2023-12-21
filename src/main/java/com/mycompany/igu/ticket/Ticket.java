@@ -5,9 +5,11 @@
 package com.mycompany.igu.ticket;
 
 import com.mycompany.igu.home.admin.HomeAdmin;
+import com.mycompany.logic.Client;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.DetailSale;
 import com.mycompany.logic.Product;
+import com.mycompany.logic.Rol;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
@@ -35,6 +37,7 @@ public class Ticket extends javax.swing.JFrame {
         this.controller = controller;
         this.user = user;
         detailSale = new ArrayList<DetailSale>();
+        loadComboBoxClient();
     }
 
     /**
@@ -63,9 +66,10 @@ public class Ticket extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        jcbClient = new javax.swing.JComboBox<>();
+        txtSearchClient = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnSearchClient = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtUserLogged = new javax.swing.JLabel();
@@ -241,16 +245,23 @@ public class Ticket extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente", "Nuevo cliente" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcbClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente", "Nuevo cliente" }));
+        jcbClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcbClientActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Buscar cliente:");
 
-        jButton1.setText("Buscar");
+        btnSearchClient.setText("Buscar");
+        btnSearchClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchClientActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Nuevo");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -258,17 +269,17 @@ public class Ticket extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearchClient, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnSearchClient)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcbClient, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,10 +287,11 @@ public class Ticket extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchClient)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
@@ -331,9 +343,9 @@ public class Ticket extends javax.swing.JFrame {
         loadProductTable();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcbClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcbClientActionPerformed
 
     private void tableProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductMouseClicked
         // TODO add your handling code here:
@@ -437,6 +449,15 @@ public class Ticket extends javax.swing.JFrame {
         loadTable();
     }//GEN-LAST:event_btnEditProductActionPerformed
 
+    private void btnSearchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchClientActionPerformed
+        // TODO add your handling code here:
+        String search = txtSearchClient.getText();
+        System.out.println("input: " + txtSearchClient.getText());
+        if(search != null){
+            loadComboBoxClient(search);
+        }
+    }//GEN-LAST:event_btnSearchClientActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
@@ -445,9 +466,9 @@ public class Ticket extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLoadTable;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearchClient;
     private javax.swing.JSpinner counter;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,10 +478,11 @@ public class Ticket extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> jcbClient;
     private javax.swing.JTable tableDetailSale;
     private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtSearchClient;
     private javax.swing.JLabel txtUserLogged;
     // End of variables declaration//GEN-END:variables
 
@@ -535,5 +557,28 @@ public class Ticket extends javax.swing.JFrame {
             }
         }
         tableProduct.setModel(model);
+    }
+
+            
+    private void loadComboBoxClient() {
+        jcbClient.removeAllItems();
+        jcbClient.addItem("Seleccione cliente");
+        List<Client> clients = controller.getClients();
+        if(clients != null){
+            for(Client c : clients){
+                jcbClient.addItem(c.getName());
+            }
+        }
+    }
+    
+    private void loadComboBoxClient(String search) {
+        jcbClient.removeAllItems();
+        jcbClient.addItem("Seleccione cliente");
+        List<Client> clients = controller.getClients(search);
+        if(clients != null){
+            for(Client c : clients){
+                jcbClient.addItem(c.getName());
+            }
+        }
     }
 }
