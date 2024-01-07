@@ -250,7 +250,16 @@ public class PersistanceController {
         CriteriaBuilder cb = clientJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Client> cq = cb.createQuery(Client.class);
         Root<Client> client = cq.from(Client.class);
-        Predicate p = cb.like(client.get("name"), "%" + search + "%");
+        Predicate p = cb.or(
+            cb.like(client.get("address"), "%" + search + "%"),
+            cb.like(client.get("cementery"), "%" + search + "%"),
+            cb.like(client.get("name"), "%" + search + "%"),
+            cb.like(client.get("nameDeceased"), "%" + search + "%"),
+            cb.like(client.get("phone"), "%" + search + "%"),
+            cb.like(client.get("rut"), "%" + search + "%"),
+            cb.like(client.get("rutDeceased"), "%" + search + "%"),
+            cb.like(client.get("wakeAddress"), "%" + search + "%")
+        );
         cq.where(p);
         return clientJpa.getEntityManager().createQuery(cq).getResultList();
     }

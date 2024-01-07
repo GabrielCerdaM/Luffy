@@ -5,6 +5,7 @@ import com.mycompany.logic.Client;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,7 +57,7 @@ public class ClientAdminView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -221,6 +222,7 @@ public class ClientAdminView extends javax.swing.JFrame {
         HomeAdmin hView = new HomeAdmin(controller, user);
         hView.setVisible(true);
         hView.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClientActionPerformed
@@ -237,6 +239,9 @@ public class ClientAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadTableActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        String search = txtSearch.getText();
+        List<Client> clients = controller.getClients(search);
+        loadTable(clients);
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -276,7 +281,7 @@ public class ClientAdminView extends javax.swing.JFrame {
         return 0;
     }
 
-    private void loadTable() {
+    private DefaultTableModel getTableModel() {
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -288,50 +293,71 @@ public class ClientAdminView extends javax.swing.JFrame {
             "Id",
             "Nombre",
             "Telefono",
-            "Correo",
             "Direccion",
             "rut  fallecido",
             "nombre fallecido",
-            "fecha fallecimiento",
-            "direccion velatorio",
-            "carrozas",
-            "vehiculo acompañamiento",
-            "avisos",
-            "urna",
-            "color",
-            "cementerio",
+//            "fecha fallecimiento",
+//            "direccion velatorio",
+//            "carrozas",
+//            "vehiculo acompañamiento",
+//            "avisos",
+//            "urna",
+//            "color",
+//            "cementerio",
             "precio",
-            "beneficio",
-            "monto beneficio"
+//            "beneficio",
+//            "monto beneficio"
         };
         model.setColumnIdentifiers(titulos);
+        return model;
+    }
+
+    private Object[] getDataFromClientModel(Client c) {
+        Object[] o = new Object[]{
+            c.getId(),
+            c.getName(),
+            c.getPhone(),
+            c.getEmail(),
+            c.getAddress(),
+            c.getRutDeceased(),
+            c.getNameDeceased(),
+//            c.getDateDeceased(),
+//            c.getWakeAddress(),
+//            c.getCarriage(),
+//            c.getAccompaniment(),
+//            c.getAnnouncements(),
+//            c.getUrn(),
+//            c.getColor(),
+//            c.getCementery(),
+//            c.getKindship(),
+            c.getPrice(),
+//            c.getBenefit(),
+//            c.getAmountBenefit()
+        };
+        return o;
+    }
+
+    private void loadTable() {
+        DefaultTableModel model = getTableModel();
         List<Client> clients = controller.getClients();
         if (clients != null) {
             for (Client c : clients) {
-                Object[] o = new Object[]{
-                    c.getId(),
-                    c.getName(),
-                    c.getPhone(),
-                    c.getEmail(),
-                    c.getAddress(),
-                    c.getRutDeceased(),
-                    c.getNameDeceased(),
-                    c.getDateDeceased(),
-                    c.getWakeAddress(),
-                    c.getCarriage(),
-                    c.getAccompaniment(),
-                    c.getAnnouncements(),
-                    c.getUrn(),
-                    c.getColor(),
-                    c.getCementery(),
-                    c.getKindship(),
-                    c.getPrice(),
-                    c.getBenefit(),
-                    c.getAmountBenefit()
-                };
+                Object[] o = getDataFromClientModel(c);
                 model.addRow(o);
             }
         }
         tableClient.setModel(model);
     }
+
+    private void loadTable(List<Client> clients) {
+        DefaultTableModel model = getTableModel();
+        if (clients != null) {
+            for (Client c : clients) {
+                Object[] o = getDataFromClientModel(c);
+                model.addRow(o);
+            }
+        }
+        tableClient.setModel(model);
+    }
+
 }

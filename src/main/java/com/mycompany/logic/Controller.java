@@ -372,7 +372,7 @@ public class Controller {
     public List<Client> getClients() {
         return persistanceController.getClients();
     }
-
+    
     public List<Client> getClients(String search) {
         return persistanceController.getClients(search);
     }
