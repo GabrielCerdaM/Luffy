@@ -4,18 +4,18 @@
  */
 package com.mycompany.igu.ticket;
 
+import com.mycompany.igu.Client.CreateClient;
 import com.mycompany.igu.home.admin.HomeAdmin;
 import com.mycompany.logic.Client;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.DetailSale;
 import com.mycompany.logic.Product;
-import com.mycompany.logic.Rol;
 import com.mycompany.logic.Sale;
 import com.mycompany.logic.User;
 import com.mycompany.utils.Utils;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,6 +71,7 @@ public class Ticket extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnSearchClient = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnReload = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtUserLogged = new javax.swing.JLabel();
 
@@ -221,8 +222,10 @@ public class Ticket extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(counter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(counter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
@@ -232,10 +235,10 @@ public class Ticket extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(counter, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(counter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
@@ -245,7 +248,6 @@ public class Ticket extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jcbClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente", "Nuevo cliente" }));
         jcbClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbClientActionPerformed(evt);
@@ -262,6 +264,18 @@ public class Ticket extends javax.swing.JFrame {
         });
 
         jButton1.setText("Nuevo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnReload.setText("Recargar");
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -269,7 +283,8 @@ public class Ticket extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbClient, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -277,8 +292,9 @@ public class Ticket extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSearchClient)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jcbClient, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReload)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -289,6 +305,7 @@ public class Ticket extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearchClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearchClient)
+                    .addComponent(btnReload)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jcbClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,10 +377,13 @@ public class Ticket extends javax.swing.JFrame {
             Utils.showMessage("No hay productos seleccinados como para generar un ticket", "Error", "Productos sin seleccionar");
             return;
         }
-        controller.createSale(detailSale);
-        Utils.showMessage("ticket creado", "Info", "Ticket creado");
-        detailSale.clear();
-        loadTable();
+        Client c = (Client)jcbClient.getSelectedItem();
+        if(c != null){
+            controller.createSale(detailSale,c);
+            Utils.showMessage("ticket creado", "Info", "Ticket creado");
+            detailSale.clear();
+            loadTable();
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void tableDetailSaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDetailSaleMouseClicked
@@ -458,6 +478,17 @@ public class Ticket extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchClientActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CreateClient view = new CreateClient(controller,user);
+        view.setVisible(true);
+        view.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        // TODO add your handling code here:
+        loadComboBoxClient();
+    }//GEN-LAST:event_btnReloadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
@@ -465,6 +496,7 @@ public class Ticket extends javax.swing.JFrame {
     private javax.swing.JButton btnEditProduct;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLoadTable;
+    private javax.swing.JButton btnReload;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearchClient;
     private javax.swing.JSpinner counter;
@@ -478,7 +510,7 @@ public class Ticket extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<String> jcbClient;
+    private javax.swing.JComboBox<Object> jcbClient;
     private javax.swing.JTable tableDetailSale;
     private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtSearch;
@@ -565,9 +597,11 @@ public class Ticket extends javax.swing.JFrame {
         jcbClient.addItem("Seleccione cliente");
         List<Client> clients = controller.getClients();
         if(clients != null){
+            DefaultComboBoxModel<Object> comboBoxModel = new DefaultComboBoxModel<>();
             for(Client c : clients){
-                jcbClient.addItem(c.getName());
+                comboBoxModel.addElement(c);
             }
+            jcbClient.setModel(comboBoxModel);
         }
     }
     
@@ -576,9 +610,11 @@ public class Ticket extends javax.swing.JFrame {
         jcbClient.addItem("Seleccione cliente");
         List<Client> clients = controller.getClients(search);
         if(clients != null){
+            DefaultComboBoxModel<Object> comboBoxModel = new DefaultComboBoxModel<>();
             for(Client c : clients){
-                jcbClient.addItem(c.getName());
+                comboBoxModel.addElement(c);
             }
+            jcbClient.setModel(comboBoxModel);
         }
     }
 }

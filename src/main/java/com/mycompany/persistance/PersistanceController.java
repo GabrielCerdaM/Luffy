@@ -7,6 +7,7 @@ package com.mycompany.persistance;
 import com.mycompany.logic.Category;
 import com.mycompany.logic.Client;
 import com.mycompany.logic.DetailSale;
+import com.mycompany.logic.Payment;
 import com.mycompany.logic.Product;
 import com.mycompany.logic.Provider;
 import com.mycompany.logic.Rol;
@@ -31,28 +32,28 @@ import javax.persistence.criteria.Root;
  */
 public class PersistanceController {
 
-
     UserJpaController userJpa = new UserJpaController();
     RolJpaController rolJpa = new RolJpaController();
     ProviderJpaController providerJpa = new ProviderJpaController();
     SaleJpaController saleJpa = new SaleJpaController();
     CategoryJpaController categoryJpa = new CategoryJpaController();
-    SubcategoryJpaController subcategoryJpa =  new SubcategoryJpaController();
+    SubcategoryJpaController subcategoryJpa = new SubcategoryJpaController();
     ProductJpaController productJpa = new ProductJpaController();
     DetailSaleJpaController detailSaleJpa = new DetailSaleJpaController();
     ClientJpaController clientJpa = new ClientJpaController();
-    
+    PaymentJpaController paymentJpa = new PaymentJpaController();
+
     public List<User> getUsers() {
         return userJpa.findUserEntities();
     }
-    
+
     public List<Rol> getRols() {
         return rolJpa.findRolEntities();
     }
 
     public boolean createUser(User user) {
         try {
-            userJpa.create(user);            
+            userJpa.create(user);
             return true;
         } catch (Exception e) {
             return false;
@@ -61,9 +62,9 @@ public class PersistanceController {
 
     public void deleteUser(int userId) {
         try {
-            userJpa.destroy(userId);            
+            userJpa.destroy(userId);
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(PersistanceController.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(PersistanceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,21 +104,21 @@ public class PersistanceController {
     public List<Subcategory> getSubcategories() {
         return subcategoryJpa.findSubcategoryEntities();
     }
-    
+
     public List<Subcategory> getSubcategories(int categoryId) {
         CriteriaBuilder cb = subcategoryJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Subcategory> cq = cb.createQuery(Subcategory.class);
         Root<Subcategory> subcategory = cq.from(Subcategory.class);
-        
+
         cq.select(subcategory).where(cb.equal(subcategory.get("category").get("id"), categoryId));
         return subcategoryJpa.getEntityManager().createQuery(cq).getResultList();
-    }    
-    
-    public List<Product> getProductBy(int subcategoryId){
+    }
+
+    public List<Product> getProductBy(int subcategoryId) {
         CriteriaBuilder cb = productJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Product> cq = cb.createQuery(Product.class);
         Root<Product> product = cq.from(Product.class);
-        
+
         cq.select(product).where(cb.equal(product.get("subcategory").get("id"), subcategoryId));
         return subcategoryJpa.getEntityManager().createQuery(cq).getResultList();
     }
@@ -170,7 +171,7 @@ public class PersistanceController {
         CriteriaBuilder cb = subcategoryJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<DetailSale> cq = cb.createQuery(DetailSale.class);
         Root<DetailSale> detailSale = cq.from(DetailSale.class);
-        
+
         cq.select(detailSale).where(cb.equal(detailSale.get("sale").get("id"), saleId));
         return subcategoryJpa.getEntityManager().createQuery(cq).getResultList();
 
@@ -187,11 +188,11 @@ public class PersistanceController {
     public void createProvider(Provider p) {
         providerJpa.create(p);
     }
-    
+
     public List<Product> getFilterProducts(String search, String categoryName, String subcategoryName, String providerName) {
-        System.out.println(""+categoryName);
-        System.out.println(""+subcategoryName);
-        System.out.println(""+providerName);
+        System.out.println("" + categoryName);
+        System.out.println("" + subcategoryName);
+        System.out.println("" + providerName);
 
         CriteriaBuilder cb = productJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Product> cq = cb.createQuery(Product.class);
@@ -199,29 +200,29 @@ public class PersistanceController {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        if(search != null && !search.isEmpty()){
+        if (search != null && !search.isEmpty()) {
             Predicate predicateOr = cb.or(
                     cb.equal(product.get("name"), search)
             );
             predicates.add(predicateOr);
         }
-        
+
         // Filtrar por subcategoría
         if (subcategoryName != null && !subcategoryName.isEmpty()) {
             System.out.println("subcategory filter");
             Join<Product, Subcategory> subcategoryJoin = product.join("subcategory");
             predicates.add(cb.equal(subcategoryJoin.get("name"), subcategoryName));
-        }else{
-        // Filtrar por categoría
-            System.out.println("!null "+categoryName != null );
-            System.out.println("!isEmpty "+!categoryName.isEmpty());
+        } else {
+            // Filtrar por categoría
+            System.out.println("!null " + categoryName != null);
+            System.out.println("!isEmpty " + !categoryName.isEmpty());
             if (categoryName != null && !categoryName.isEmpty()) {
                 System.out.println("category filter");
                 Join<Product, Subcategory> subcategoryJoin = product.join("subcategory");
                 Join<Subcategory, Category> categoryJoin = subcategoryJoin.join("category");
                 predicates.add(cb.equal(categoryJoin.get("name"), categoryName));
             }
-        
+
         }
 
         // Filtrar por proveedor
@@ -233,7 +234,7 @@ public class PersistanceController {
         // el error esta aca
 //        Predicate[] predArray = new Predicate[predicates.size()];
 //        predicates.toArray(predArray);
-        System.out.println("predicates"+predicates.toString());
+        System.out.println("predicates" + predicates.toString());
         cq.where(predicates.toArray(new Predicate[0]));
 //        cq.where(predArray);
 
@@ -245,21 +246,47 @@ public class PersistanceController {
     }
 
     public List<Client> getClients(String search) {
-        System.out.println("search: "+search);
+        System.out.println("search: " + search);
         CriteriaBuilder cb = clientJpa.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Client> cq = cb.createQuery(Client.class);
         Root<Client> client = cq.from(Client.class);
-        Predicate p = cb.like(client.get("name"),"%"+search+"%");
+        Predicate p = cb.like(client.get("name"), "%" + search + "%");
         cq.where(p);
         return clientJpa.getEntityManager().createQuery(cq).getResultList();
     }
-    
+
     public Client getClientById(int clientId) {
         return clientJpa.findClient(clientId);
     }
 
     public void createClient(Client c) {
         clientJpa.create(c);
+    }
+
+    public List<Payment> getPayments() {
+        return paymentJpa.findPaymentEntities();
+    }
+
+    public List<Payment> getPayments(int clientId) {
+        CriteriaBuilder cb = paymentJpa.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Payment> cq = cb.createQuery(Payment.class);
+        Root<Payment> payment = cq.from(Payment.class);
+        Predicate p = cb.equal(payment.get("client").get("id"), clientId);
+        cq.where(p);
+        return paymentJpa.getEntityManager().createQuery(cq).getResultList();
+
+    }
+
+    public void createPayment(Payment payment) {
+        paymentJpa.create(payment);
+    }
+    
+    public void editClient(Client c) throws Exception{
+        clientJpa.edit(c);
+    }
+
+    public void deleteClient(int clientId) throws NonexistentEntityException {
+        clientJpa.destroy(clientId);
     }
 
 }

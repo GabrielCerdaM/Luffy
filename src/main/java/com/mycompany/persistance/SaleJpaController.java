@@ -4,17 +4,21 @@
  */
 package com.mycompany.persistance;
 
-import com.mycompany.logic.Sale;
-import com.mycompany.persistance.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import com.mycompany.logic.Client;
+import com.mycompany.logic.DetailSale;
+import java.util.ArrayList;
+import java.util.List;
+import com.mycompany.logic.Document;
+import com.mycompany.logic.Sale;
+import com.mycompany.persistance.exceptions.NonexistentEntityException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -25,6 +29,7 @@ public class SaleJpaController implements Serializable {
     public SaleJpaController() {
         this.emf = Persistence.createEntityManagerFactory("Luffy_PU");
     }
+
     public SaleJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -35,11 +40,56 @@ public class SaleJpaController implements Serializable {
     }
 
     public void create(Sale sale) {
+        if (sale.getDetailSale() == null) {
+            sale.setDetailSale(new ArrayList<DetailSale>());
+        }
+        if (sale.getDocument() == null) {
+            sale.setDocument(new ArrayList<Document>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Client client = sale.getClient();
+            if (client != null) {
+                client = em.getReference(client.getClass(), client.getId());
+                sale.setClient(client);
+            }
+            List<DetailSale> attachedDetailSale = new ArrayList<DetailSale>();
+            for (DetailSale detailSaleDetailSaleToAttach : sale.getDetailSale()) {
+                detailSaleDetailSaleToAttach = em.getReference(detailSaleDetailSaleToAttach.getClass(), detailSaleDetailSaleToAttach.getId());
+                attachedDetailSale.add(detailSaleDetailSaleToAttach);
+            }
+            sale.setDetailSale(attachedDetailSale);
+            List<Document> attachedDocument = new ArrayList<Document>();
+            for (Document documentDocumentToAttach : sale.getDocument()) {
+                documentDocumentToAttach = em.getReference(documentDocumentToAttach.getClass(), documentDocumentToAttach.getId());
+                attachedDocument.add(documentDocumentToAttach);
+            }
+            sale.setDocument(attachedDocument);
             em.persist(sale);
+            if (client != null) {
+                client.getSale().add(sale);
+                client = em.merge(client);
+            }
+            for (DetailSale detailSaleDetailSale : sale.getDetailSale()) {
+                Sale oldSaleOfDetailSaleDetailSale = detailSaleDetailSale.getSale();
+                detailSaleDetailSale.setSale(sale);
+                detailSaleDetailSale = em.merge(detailSaleDetailSale);
+                if (oldSaleOfDetailSaleDetailSale != null) {
+                    oldSaleOfDetailSaleDetailSale.getDetailSale().remove(detailSaleDetailSale);
+                    oldSaleOfDetailSaleDetailSale = em.merge(oldSaleOfDetailSaleDetailSale);
+                }
+            }
+            for (Document documentDocument : sale.getDocument()) {
+                Sale oldSaleOfDocumentDocument = documentDocument.getSale();
+                documentDocument.setSale(sale);
+                documentDocument = em.merge(documentDocument);
+                if (oldSaleOfDocumentDocument != null) {
+                    oldSaleOfDocumentDocument.getDocument().remove(documentDocument);
+                    oldSaleOfDocumentDocument = em.merge(oldSaleOfDocumentDocument);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -53,7 +103,74 @@ public class SaleJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Sale persistentSale = em.find(Sale.class, sale.getId());
+            Client clientOld = persistentSale.getClient();
+            Client clientNew = sale.getClient();
+            List<DetailSale> detailSaleOld = persistentSale.getDetailSale();
+            List<DetailSale> detailSaleNew = sale.getDetailSale();
+            List<Document> documentOld = persistentSale.getDocument();
+            List<Document> documentNew = sale.getDocument();
+            if (clientNew != null) {
+                clientNew = em.getReference(clientNew.getClass(), clientNew.getId());
+                sale.setClient(clientNew);
+            }
+            List<DetailSale> attachedDetailSaleNew = new ArrayList<DetailSale>();
+            for (DetailSale detailSaleNewDetailSaleToAttach : detailSaleNew) {
+                detailSaleNewDetailSaleToAttach = em.getReference(detailSaleNewDetailSaleToAttach.getClass(), detailSaleNewDetailSaleToAttach.getId());
+                attachedDetailSaleNew.add(detailSaleNewDetailSaleToAttach);
+            }
+            detailSaleNew = attachedDetailSaleNew;
+            sale.setDetailSale(detailSaleNew);
+            List<Document> attachedDocumentNew = new ArrayList<Document>();
+            for (Document documentNewDocumentToAttach : documentNew) {
+                documentNewDocumentToAttach = em.getReference(documentNewDocumentToAttach.getClass(), documentNewDocumentToAttach.getId());
+                attachedDocumentNew.add(documentNewDocumentToAttach);
+            }
+            documentNew = attachedDocumentNew;
+            sale.setDocument(documentNew);
             sale = em.merge(sale);
+            if (clientOld != null && !clientOld.equals(clientNew)) {
+                clientOld.getSale().remove(sale);
+                clientOld = em.merge(clientOld);
+            }
+            if (clientNew != null && !clientNew.equals(clientOld)) {
+                clientNew.getSale().add(sale);
+                clientNew = em.merge(clientNew);
+            }
+            for (DetailSale detailSaleOldDetailSale : detailSaleOld) {
+                if (!detailSaleNew.contains(detailSaleOldDetailSale)) {
+                    detailSaleOldDetailSale.setSale(null);
+                    detailSaleOldDetailSale = em.merge(detailSaleOldDetailSale);
+                }
+            }
+            for (DetailSale detailSaleNewDetailSale : detailSaleNew) {
+                if (!detailSaleOld.contains(detailSaleNewDetailSale)) {
+                    Sale oldSaleOfDetailSaleNewDetailSale = detailSaleNewDetailSale.getSale();
+                    detailSaleNewDetailSale.setSale(sale);
+                    detailSaleNewDetailSale = em.merge(detailSaleNewDetailSale);
+                    if (oldSaleOfDetailSaleNewDetailSale != null && !oldSaleOfDetailSaleNewDetailSale.equals(sale)) {
+                        oldSaleOfDetailSaleNewDetailSale.getDetailSale().remove(detailSaleNewDetailSale);
+                        oldSaleOfDetailSaleNewDetailSale = em.merge(oldSaleOfDetailSaleNewDetailSale);
+                    }
+                }
+            }
+            for (Document documentOldDocument : documentOld) {
+                if (!documentNew.contains(documentOldDocument)) {
+                    documentOldDocument.setSale(null);
+                    documentOldDocument = em.merge(documentOldDocument);
+                }
+            }
+            for (Document documentNewDocument : documentNew) {
+                if (!documentOld.contains(documentNewDocument)) {
+                    Sale oldSaleOfDocumentNewDocument = documentNewDocument.getSale();
+                    documentNewDocument.setSale(sale);
+                    documentNewDocument = em.merge(documentNewDocument);
+                    if (oldSaleOfDocumentNewDocument != null && !oldSaleOfDocumentNewDocument.equals(sale)) {
+                        oldSaleOfDocumentNewDocument.getDocument().remove(documentNewDocument);
+                        oldSaleOfDocumentNewDocument = em.merge(oldSaleOfDocumentNewDocument);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -82,6 +199,21 @@ public class SaleJpaController implements Serializable {
                 sale.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The sale with id " + id + " no longer exists.", enfe);
+            }
+            Client client = sale.getClient();
+            if (client != null) {
+                client.getSale().remove(sale);
+                client = em.merge(client);
+            }
+            List<DetailSale> detailSale = sale.getDetailSale();
+            for (DetailSale detailSaleDetailSale : detailSale) {
+                detailSaleDetailSale.setSale(null);
+                detailSaleDetailSale = em.merge(detailSaleDetailSale);
+            }
+            List<Document> document = sale.getDocument();
+            for (Document documentDocument : document) {
+                documentDocument.setSale(null);
+                documentDocument = em.merge(documentDocument);
             }
             em.remove(sale);
             em.getTransaction().commit();
@@ -137,5 +269,5 @@ public class SaleJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -5,16 +5,18 @@
 package com.mycompany.persistance;
 
 import com.mycompany.logic.Client;
-import com.mycompany.persistance.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import com.mycompany.logic.Sale;
+import com.mycompany.persistance.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -36,11 +38,29 @@ public class ClientJpaController implements Serializable {
     }
 
     public void create(Client client) {
+        if (client.getSale() == null) {
+            client.setSale(new ArrayList<Sale>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Sale> attachedSale = new ArrayList<Sale>();
+            for (Sale saleSaleToAttach : client.getSale()) {
+                saleSaleToAttach = em.getReference(saleSaleToAttach.getClass(), saleSaleToAttach.getId());
+                attachedSale.add(saleSaleToAttach);
+            }
+            client.setSale(attachedSale);
             em.persist(client);
+            for (Sale saleSale : client.getSale()) {
+                Client oldClientOfSaleSale = saleSale.getClient();
+                saleSale.setClient(client);
+                saleSale = em.merge(saleSale);
+                if (oldClientOfSaleSale != null) {
+                    oldClientOfSaleSale.getSale().remove(saleSale);
+                    oldClientOfSaleSale = em.merge(oldClientOfSaleSale);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -54,7 +74,34 @@ public class ClientJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Client persistentClient = em.find(Client.class, client.getId());
+            List<Sale> saleOld = persistentClient.getSale();
+            List<Sale> saleNew = client.getSale();
+            List<Sale> attachedSaleNew = new ArrayList<Sale>();
+            for (Sale saleNewSaleToAttach : saleNew) {
+                saleNewSaleToAttach = em.getReference(saleNewSaleToAttach.getClass(), saleNewSaleToAttach.getId());
+                attachedSaleNew.add(saleNewSaleToAttach);
+            }
+            saleNew = attachedSaleNew;
+            client.setSale(saleNew);
             client = em.merge(client);
+            for (Sale saleOldSale : saleOld) {
+                if (!saleNew.contains(saleOldSale)) {
+                    saleOldSale.setClient(null);
+                    saleOldSale = em.merge(saleOldSale);
+                }
+            }
+            for (Sale saleNewSale : saleNew) {
+                if (!saleOld.contains(saleNewSale)) {
+                    Client oldClientOfSaleNewSale = saleNewSale.getClient();
+                    saleNewSale.setClient(client);
+                    saleNewSale = em.merge(saleNewSale);
+                    if (oldClientOfSaleNewSale != null && !oldClientOfSaleNewSale.equals(client)) {
+                        oldClientOfSaleNewSale.getSale().remove(saleNewSale);
+                        oldClientOfSaleNewSale = em.merge(oldClientOfSaleNewSale);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -83,6 +130,11 @@ public class ClientJpaController implements Serializable {
                 client.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The client with id " + id + " no longer exists.", enfe);
+            }
+            List<Sale> sale = client.getSale();
+            for (Sale saleSale : sale) {
+                saleSale.setClient(null);
+                saleSale = em.merge(saleSale);
             }
             em.remove(client);
             em.getTransaction().commit();
@@ -138,5 +190,5 @@ public class ClientJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

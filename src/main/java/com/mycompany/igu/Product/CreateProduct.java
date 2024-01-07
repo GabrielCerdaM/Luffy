@@ -240,9 +240,6 @@ public class CreateProduct extends javax.swing.JFrame {
                     String subcategoryName = (String)cmbSubcategory.getSelectedItem();
                     String providerName = (String)cmbProvider.getSelectedItem();
                     controller.createProduct(name,price,stock,categoryName,subcategoryName,providerName);                
-                    ProductView pView = new ProductView(controller, user);
-                    pView.setVisible(true);
-                    pView.setLocationRelativeTo(null);
                     this.dispose();
                 } catch (NumberFormatException e) {
                 Utils.showMessage(e.getMessage(), "Error", "Eror al editar producto");

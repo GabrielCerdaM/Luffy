@@ -4,16 +4,9 @@
  */
 package com.mycompany.igu.home.admin;
 
-import com.mycompany.igu.Category.CategoryView;
 import com.mycompany.igu.Client.ClientAdminView;
-import com.mycompany.igu.Login;
 import com.mycompany.igu.Main;
-import com.mycompany.igu.Product.ProductView;
-import com.mycompany.igu.Sale.SaleViewAdmin;
-import com.mycompany.igu.Subcategory.SubcategoryView;
-import com.mycompany.igu.User.UserViewAdmin;
-import com.mycompany.igu.provider.ProviderView;
-import com.mycompany.igu.ticket.Ticket;
+import com.mycompany.igu.payment.PaymentView;
 import com.mycompany.logic.Controller;
 import com.mycompany.logic.User;
 
@@ -43,34 +36,27 @@ public class HomeAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnTicketView = new javax.swing.JButton();
-        btnSaleView = new javax.swing.JButton();
+        btnPayments = new javax.swing.JButton();
+        btnClientView = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnLogout = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        btnSubcategoryView = new javax.swing.JButton();
-        btnCategoryView = new javax.swing.JButton();
-        btnUserView = new javax.swing.JButton();
-        btnProductView = new javax.swing.JButton();
-        btnProviderView = new javax.swing.JButton();
-        btnClientView = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.black);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTicketView.setText("Ticket");
-        btnTicketView.addActionListener(new java.awt.event.ActionListener() {
+        btnPayments.setText("Abonos");
+        btnPayments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTicketViewActionPerformed(evt);
+                btnPaymentsActionPerformed(evt);
             }
         });
 
-        btnSaleView.setText("Ventas");
-        btnSaleView.addActionListener(new java.awt.event.ActionListener() {
+        btnClientView.setText("Clientes");
+        btnClientView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaleViewActionPerformed(evt);
+                btnClientViewActionPerformed(evt);
             }
         });
 
@@ -80,19 +66,19 @@ public class HomeAdmin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(btnTicketView, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addComponent(btnSaleView, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(btnClientView, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(btnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaleView, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTicketView, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(206, 206, 206))
+                    .addComponent(btnClientView, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         btnLogout.setText("Cerrar Sesion");
@@ -106,10 +92,10 @@ public class HomeAdmin extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(232, 232, 232)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(373, 373, 373))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,109 +105,27 @@ public class HomeAdmin extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btnSubcategoryView.setText("Subcategory");
-        btnSubcategoryView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubcategoryViewActionPerformed(evt);
-            }
-        });
-
-        btnCategoryView.setText("Category");
-        btnCategoryView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCategoryViewActionPerformed(evt);
-            }
-        });
-
-        btnUserView.setText("Usuarios");
-        btnUserView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserViewActionPerformed(evt);
-            }
-        });
-
-        btnProductView.setText("Productos");
-        btnProductView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductViewActionPerformed(evt);
-            }
-        });
-
-        btnProviderView.setText("Proveedores");
-        btnProviderView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProviderViewActionPerformed(evt);
-            }
-        });
-
-        btnClientView.setText("Clientes");
-        btnClientView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientViewActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnProviderView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnProductView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSubcategoryView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCategoryView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUserView, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnClientView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(btnClientView, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnProviderView, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnProductView, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUserView, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCategoryView, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSubcategoryView, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,46 +139,6 @@ public class HomeAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnClientViewActionPerformed
 
-    private void btnProviderViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProviderViewActionPerformed
-        // TODO add your handling code here:
-        ProviderView pView = new ProviderView(controller, user);
-        pView.setVisible(true);
-        pView.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnProviderViewActionPerformed
-
-    private void btnProductViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductViewActionPerformed
-        // TODO add your handling code here:
-        ProductView pView = new ProductView(controller, user);
-        pView.setVisible(true);
-        pView.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnProductViewActionPerformed
-
-    private void btnUserViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserViewActionPerformed
-        // TODO add your handling code here:
-        UserViewAdmin userView = new UserViewAdmin(controller, user);
-        userView.setVisible(true);
-        userView.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnUserViewActionPerformed
-
-    private void btnCategoryViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoryViewActionPerformed
-        // TODO add your handling code here:
-        CategoryView cView = new CategoryView(controller, user);
-        cView.setVisible(true);
-        cView.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnCategoryViewActionPerformed
-
-    private void btnSubcategoryViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubcategoryViewActionPerformed
-        // TODO add your handling code here:
-        SubcategoryView subCView = new SubcategoryView(controller, user);
-        subCView.setVisible(true);
-        subCView.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnSubcategoryViewActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
         Main login = new Main();
@@ -283,35 +147,19 @@ public class HomeAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void btnSaleViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleViewActionPerformed
-        // TODO add your handling code here:
-        SaleViewAdmin sView = new SaleViewAdmin(controller, user);
-        sView.setVisible(true);
-        sView.setLocationRelativeTo(null);
+    private void btnPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentsActionPerformed
+        PaymentView p = new PaymentView(controller, user);
+        p.setVisible(true);
+        p.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnSaleViewActionPerformed
-
-    private void btnTicketViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketViewActionPerformed
-        // TODO add your handling code here:
-        Ticket t = new Ticket(controller, user);
-        t.setVisible(true);
-        t.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnTicketViewActionPerformed
+    }//GEN-LAST:event_btnPaymentsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCategoryView;
     private javax.swing.JButton btnClientView;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnProductView;
-    private javax.swing.JButton btnProviderView;
-    private javax.swing.JButton btnSaleView;
-    private javax.swing.JButton btnSubcategoryView;
-    private javax.swing.JButton btnTicketView;
-    private javax.swing.JButton btnUserView;
+    private javax.swing.JButton btnPayments;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

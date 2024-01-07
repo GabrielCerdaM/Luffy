@@ -191,10 +191,9 @@ public class ProviderView extends javax.swing.JFrame {
 
     private void btnCreateProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateProviderActionPerformed
         // TODO add your handling code here:
-        CreateCategory createView = new CreateCategory(controller, user);
+        CreateProvider createView = new CreateProvider(controller, user);
         createView.setVisible(true);
         createView.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnCreateProviderActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

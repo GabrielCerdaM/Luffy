@@ -6,6 +6,7 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Provider implements Serializable {
     private String description;
     private String phone;
     private String address;
-    @OneToMany(mappedBy = "provider")
+    @OneToMany(mappedBy = "provider",cascade = CascadeType.PERSIST)
     private List<Product> products;
 
     public Provider() {

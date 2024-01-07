@@ -6,6 +6,7 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Subcategory implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @OneToMany(mappedBy = "subcategory")
+    @OneToMany(mappedBy = "subcategory",cascade = CascadeType.PERSIST)
     private List<Product> products;
 
     public Subcategory() {

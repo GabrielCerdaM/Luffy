@@ -161,6 +161,7 @@ public class CreateProvider extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String address = txtAddress.getText();
         controller.createProvider(name,description,phone,address);
+        this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
@@ -173,9 +174,6 @@ public class CreateProvider extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        ProviderView view = new ProviderView(controller, user);
-        view.setVisible(true);
-        view.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 

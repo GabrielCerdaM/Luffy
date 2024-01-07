@@ -6,6 +6,7 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Rol implements Serializable {
     private int id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "rol")
+    @OneToMany(mappedBy = "rol",cascade = CascadeType.PERSIST)
     private List<User> users;
     public Rol() {
     }

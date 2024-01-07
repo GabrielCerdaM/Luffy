@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Gabriel
@@ -21,8 +20,10 @@ public class ClientAdminView extends javax.swing.JFrame {
 
     private Controller controller;
     private User user;
+
     /**
      * Creates new form Client
+     *
      * @param controller
      * @param user
      */
@@ -51,12 +52,6 @@ public class ClientAdminView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClient = new javax.swing.JTable();
         txtUserLogged = new javax.swing.JLabel();
-        cmbSubcategory = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cmbProvider = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        cmbCategory = new javax.swing.JComboBox<>();
         btnFilter = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -121,23 +116,6 @@ public class ClientAdminView extends javax.swing.JFrame {
 
         txtUserLogged.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
-        cmbSubcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Subcategoria" }));
-
-        jLabel2.setText("Subcategoria:");
-
-        jLabel3.setText("Proveedor");
-
-        cmbProvider.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proveedor" }));
-
-        jLabel4.setText("Subcategoria:");
-
-        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoria" }));
-        cmbCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoryActionPerformed(evt);
-            }
-        });
-
         btnFilter.setText("Filtrar");
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,41 +130,32 @@ public class ClientAdminView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 933, Short.MAX_VALUE)
+                        .addContainerGap(955, Short.MAX_VALUE)
                         .addComponent(txtUserLogged, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSearch)
-                                    .addComponent(cmbCategory, 0, 136, Short.MAX_VALUE))
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbSubcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbProvider, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnLoadTable, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(btnDeleteClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(btnCreateClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(btnEditClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(btnLoadTable, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(btnDeleteClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(btnCreateClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(btnEditClient, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -196,18 +165,11 @@ public class ClientAdminView extends javax.swing.JFrame {
                 .addComponent(txtUserLogged)
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbSubcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnFilter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -241,40 +203,31 @@ public class ClientAdminView extends javax.swing.JFrame {
 
     private void btnEditClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditClientActionPerformed
         int clientId = getSelectedFromTable();
-        if(clientId > 0){
-            EditClient view = new EditClient(controller,user,clientId);
+        if (clientId > 0) {
+            EditClient view = new EditClient(controller, user, clientId);
             view.setVisible(true);
             view.setLocationRelativeTo(null);
-            this.dispose();
         }
     }//GEN-LAST:event_btnEditClientActionPerformed
 
     private void btnCreateClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateClientActionPerformed
         // TODO add your handling code here:
-        CreateClient view = new CreateClient(controller,user);
+        CreateClient view = new CreateClient(controller, user);
         view.setVisible(true);
         view.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnCreateClientActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         HomeAdmin hView = new HomeAdmin(controller, user);
         hView.setVisible(true);
         hView.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClientActionPerformed
         // TODO add your handling code here:
         int clientId = getSelectedFromTable();
-        if(clientId > 0){
-//            try {
-//                controller.deleteProduct(productId);
-//            } catch (NonexistentEntityException ex) {
-//                Logger.getLogger(ProductView.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            loadTable();
-        }
+        controller.deleteClient(clientId);
+        loadTable();
     }//GEN-LAST:event_btnDeleteClientActionPerformed
 
     private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
@@ -282,10 +235,6 @@ public class ClientAdminView extends javax.swing.JFrame {
         loadTable();
 //        loadComboBoxes();
     }//GEN-LAST:event_btnLoadTableActionPerformed
-
-    private void cmbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCategoryActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
     }//GEN-LAST:event_btnFilterActionPerformed
@@ -303,13 +252,7 @@ public class ClientAdminView extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnLoadTable;
-    private javax.swing.JComboBox<String> cmbCategory;
-    private javax.swing.JComboBox<String> cmbProvider;
-    private javax.swing.JComboBox<String> cmbSubcategory;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -318,40 +261,77 @@ public class ClientAdminView extends javax.swing.JFrame {
     private javax.swing.JLabel txtUserLogged;
     // End of variables declaration//GEN-END:variables
 
-    private void loadTable(){
-        DefaultTableModel model = new DefaultTableModel(){
+    private int getSelectedFromTable() {
+        if (tableClient.getRowCount() > 0) {
+            if (tableClient.getSelectedRow() != -1) {
+                Object object = tableClient.getValueAt(tableClient.getSelectedRow(), 0);
+                int clientId = Integer.parseInt(String.valueOf(object));
+                return clientId;
+            } else {
+                Utils.showMessage("Ninguna fila ha sido seleccionada", "Error", "Error");
+            }
+        } else {
+            Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");
+        }
+        return 0;
+    }
+
+    private void loadTable() {
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
-        String titulos[] = {"Id","Nombre","Telefono","Correo","Direccion"};
+
+        String titulos[] = {
+            "Id",
+            "Nombre",
+            "Telefono",
+            "Correo",
+            "Direccion",
+            "rut  fallecido",
+            "nombre fallecido",
+            "fecha fallecimiento",
+            "direccion velatorio",
+            "carrozas",
+            "vehiculo acompañamiento",
+            "avisos",
+            "urna",
+            "color",
+            "cementerio",
+            "precio",
+            "beneficio",
+            "monto beneficio"
+        };
         model.setColumnIdentifiers(titulos);
         List<Client> clients = controller.getClients();
-        if(clients != null){
-            for(Client c : clients){
+        if (clients != null) {
+            for (Client c : clients) {
                 Object[] o = new Object[]{
-                    c.getId(),c.getName(),c.getPhone(),c.getEmail(),c.getAddress()
+                    c.getId(),
+                    c.getName(),
+                    c.getPhone(),
+                    c.getEmail(),
+                    c.getAddress(),
+                    c.getRutDeceased(),
+                    c.getNameDeceased(),
+                    c.getDateDeceased(),
+                    c.getWakeAddress(),
+                    c.getCarriage(),
+                    c.getAccompaniment(),
+                    c.getAnnouncements(),
+                    c.getUrn(),
+                    c.getColor(),
+                    c.getCementery(),
+                    c.getKindship(),
+                    c.getPrice(),
+                    c.getBenefit(),
+                    c.getAmountBenefit()
                 };
                 model.addRow(o);
             }
         }
         tableClient.setModel(model);
-    }
-    
-    private int getSelectedFromTable(){
-        if(tableClient.getRowCount() > 0){
-            if(tableClient.getSelectedRow() != -1){
-                Object object = tableClient.getValueAt(tableClient.getSelectedRow(),0);
-                int productId = Integer.parseInt(String.valueOf(object));
-                return productId;
-          }else{
-            Utils.showMessage("Ninguna fila ha sido seleccionada", "Error", "Error");
-          }
-        }else{
-              Utils.showMessage("La Lista se encuentra vacia", "Error", "Errors");          
-        }
-        return 0;
     }
 }

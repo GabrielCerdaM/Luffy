@@ -6,6 +6,7 @@ package com.mycompany.logic;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,8 +37,9 @@ public class Payment implements Serializable {
     private LocalDateTime deletedAt;
     
     @ManyToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     @PrePersist
     protected void onCreate() {
         if (createdAt == null) {
@@ -47,14 +49,14 @@ public class Payment implements Serializable {
 
     public Payment() {
     }
-    
-    public Payment(int id, int amount, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Sale sale) {
+
+    public Payment(int id, int amount, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Client client) {
         this.id = id;
         this.amount = amount;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-        this.sale = sale;
+        this.client = client;
     }
 
     public int getId() {
@@ -97,12 +99,13 @@ public class Payment implements Serializable {
         this.deletedAt = deletedAt;
     }
 
-    public Sale getSale() {
-        return sale;
+    public Client getClient() {
+        return client;
     }
 
-    public void setSale(Sale sale) {
-        this.sale = sale;
+    public void setClient(Client client) {
+        this.client = client;
     }
+
     
 }

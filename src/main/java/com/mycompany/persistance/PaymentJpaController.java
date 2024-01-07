@@ -5,23 +5,23 @@
 package com.mycompany.persistance;
 
 import com.mycompany.logic.Payment;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.mycompany.logic.Sale;
 import com.mycompany.persistance.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author Gabriel
  */
 public class PaymentJpaController implements Serializable {
+
     public PaymentJpaController() {
         this.emf = Persistence.createEntityManagerFactory("Luffy_PU");
     }
@@ -40,16 +40,7 @@ public class PaymentJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Sale sale = payment.getSale();
-            if (sale != null) {
-                sale = em.getReference(sale.getClass(), sale.getId());
-                payment.setSale(sale);
-            }
             em.persist(payment);
-            if (sale != null) {
-                sale.getPayment().add(payment);
-                sale = em.merge(sale);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -63,22 +54,7 @@ public class PaymentJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Payment persistentPayment = em.find(Payment.class, payment.getId());
-            Sale saleOld = persistentPayment.getSale();
-            Sale saleNew = payment.getSale();
-            if (saleNew != null) {
-                saleNew = em.getReference(saleNew.getClass(), saleNew.getId());
-                payment.setSale(saleNew);
-            }
             payment = em.merge(payment);
-            if (saleOld != null && !saleOld.equals(saleNew)) {
-                saleOld.getPayment().remove(payment);
-                saleOld = em.merge(saleOld);
-            }
-            if (saleNew != null && !saleNew.equals(saleOld)) {
-                saleNew.getPayment().add(payment);
-                saleNew = em.merge(saleNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -107,11 +83,6 @@ public class PaymentJpaController implements Serializable {
                 payment.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The payment with id " + id + " no longer exists.", enfe);
-            }
-            Sale sale = payment.getSale();
-            if (sale != null) {
-                sale.getPayment().remove(payment);
-                sale = em.merge(sale);
             }
             em.remove(payment);
             em.getTransaction().commit();
@@ -167,5 +138,5 @@ public class PaymentJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

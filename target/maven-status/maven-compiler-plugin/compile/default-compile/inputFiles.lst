@@ -5,7 +5,6 @@ C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\pe
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Client\EditClient.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Category.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\exceptions\IllegalOrphanException.java
-C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\exceptions\PreexistingEntityException.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Subcategory\SubcategoryEdit.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\DetailSaleJpaController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\exceptions\PreexistingEntityException.java
@@ -24,15 +23,14 @@ C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\pe
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Subcategory\SubcategoryCreate.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Main.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\DetailSale.java
+C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\payment\PaymentView.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Rol.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\User.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\utils\Utils.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Product\ProductView.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\provider\EditProvider.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Payment.java
-C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\exceptions\IllegalOrphanException.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\logic\Sale.java
-C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\exceptions\NonexistentEntityException.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Subcategory\SubcategoryView.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\persistance\ClientJpaController.java
 C:\Users\Gabriel\Documents\NetBeansProjects\luffy\src\main\java\com\mycompany\igu\Product\CreateProduct.java

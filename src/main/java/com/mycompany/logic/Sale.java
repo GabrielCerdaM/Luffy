@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
@@ -22,6 +24,7 @@ import javax.persistence.PrePersist;
  */
 @Entity
 public class Sale implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -29,16 +32,19 @@ public class Sale implements Serializable {
     private int total;
     private double iva;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
     private List<DetailSale> detailSale;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
-    private List<Payment> payment;
-
+//    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
+//    private List<Payment> payment;
     @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
     private List<Document> document;
 
-    @Column(name = "created_at" ,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
@@ -57,13 +63,13 @@ public class Sale implements Serializable {
     public Sale() {
     }
 
-    public Sale(int id, boolean payment_status, int total, double iva, List<DetailSale> detailSale, List<Payment> payment, List<Document> document, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Sale(int id, boolean payment_status, int total, double iva, Client client, List<DetailSale> detailSale, List<Document> document, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.payment_status = payment_status;
         this.total = total;
         this.iva = iva;
+        this.client = client;
         this.detailSale = detailSale;
-        this.payment = payment;
         this.document = document;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -110,14 +116,6 @@ public class Sale implements Serializable {
         this.detailSale = detailSale;
     }
 
-    public List<Payment> getPayment() {
-        return payment;
-    }
-
-    public void setPayment(List<Payment> payment) {
-        this.payment = payment;
-    }
-
     public List<Document> getDocument() {
         return document;
     }
@@ -149,5 +147,13 @@ public class Sale implements Serializable {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-    
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
 }
