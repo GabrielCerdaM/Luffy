@@ -7,6 +7,7 @@ package com.mycompany.persistance;
 import com.mycompany.logic.Category;
 import com.mycompany.logic.Client;
 import com.mycompany.logic.DetailSale;
+import com.mycompany.logic.Document;
 import com.mycompany.logic.Payment;
 import com.mycompany.logic.Product;
 import com.mycompany.logic.Provider;
@@ -42,6 +43,7 @@ public class PersistanceController {
     DetailSaleJpaController detailSaleJpa = new DetailSaleJpaController();
     ClientJpaController clientJpa = new ClientJpaController();
     PaymentJpaController paymentJpa = new PaymentJpaController();
+    DocumentJpaController documentJpa = new DocumentJpaController();
 
     public List<User> getUsers() {
         return userJpa.findUserEntities();
@@ -251,14 +253,14 @@ public class PersistanceController {
         CriteriaQuery<Client> cq = cb.createQuery(Client.class);
         Root<Client> client = cq.from(Client.class);
         Predicate p = cb.or(
-            cb.like(client.get("address"), "%" + search + "%"),
-            cb.like(client.get("cementery"), "%" + search + "%"),
-            cb.like(client.get("name"), "%" + search + "%"),
-            cb.like(client.get("nameDeceased"), "%" + search + "%"),
-            cb.like(client.get("phone"), "%" + search + "%"),
-            cb.like(client.get("rut"), "%" + search + "%"),
-            cb.like(client.get("rutDeceased"), "%" + search + "%"),
-            cb.like(client.get("wakeAddress"), "%" + search + "%")
+                cb.like(client.get("address"), "%" + search + "%"),
+                cb.like(client.get("cementery"), "%" + search + "%"),
+                cb.like(client.get("name"), "%" + search + "%"),
+                cb.like(client.get("nameDeceased"), "%" + search + "%"),
+                cb.like(client.get("phone"), "%" + search + "%"),
+                cb.like(client.get("rut"), "%" + search + "%"),
+                cb.like(client.get("rutDeceased"), "%" + search + "%"),
+                cb.like(client.get("wakeAddress"), "%" + search + "%")
         );
         cq.where(p);
         return clientJpa.getEntityManager().createQuery(cq).getResultList();
@@ -289,13 +291,36 @@ public class PersistanceController {
     public void createPayment(Payment payment) {
         paymentJpa.create(payment);
     }
-    
-    public void editClient(Client c) throws Exception{
+
+    public void editClient(Client c) throws Exception {
         clientJpa.edit(c);
     }
 
     public void deleteClient(int clientId) throws NonexistentEntityException {
         clientJpa.destroy(clientId);
+    }
+
+    public List<Document> getDocuments(int clientId) {
+        CriteriaBuilder cb = paymentJpa.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Document> cq = cb.createQuery(Document.class);
+        Root<Document> doc = cq.from(Document.class);
+        Predicate p = cb.equal(doc.get("client").get("id"), clientId);
+        cq.where(p);
+        return paymentJpa.getEntityManager().createQuery(cq).getResultList();
+
+    }
+
+    public List<Document> getDocuments() {
+        return documentJpa.findDocumentEntities();
+    }
+
+    public boolean createDocument(Document d) {
+        try {
+            documentJpa.create(d);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

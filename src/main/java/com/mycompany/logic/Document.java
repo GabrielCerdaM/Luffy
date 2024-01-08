@@ -30,8 +30,8 @@ public class Document implements Serializable {
     private String location;
 
     @ManyToOne
-    @JoinColumn(name="sale_id")
-    private Sale sale;
+    @JoinColumn(name="client_id")
+    private Client client;
 
     @Column(name = "created_at" ,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
@@ -52,12 +52,12 @@ public class Document implements Serializable {
     public Document() {
     }
 
-    public Document(int id, Sale sale, String name, String extension, String location, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Document(int id, String name, String extension, String location, Client client, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.sale = sale;
         this.name = name;
         this.extension = extension;
         this.location = location;
+        this.client = client;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -69,14 +69,6 @@ public class Document implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
     }
 
     public String getName() {
@@ -103,6 +95,14 @@ public class Document implements Serializable {
         this.location = location;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -126,6 +126,6 @@ public class Document implements Serializable {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-    
+
     
 }

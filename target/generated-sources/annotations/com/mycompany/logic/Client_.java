@@ -1,5 +1,6 @@
 package com.mycompany.logic;
 
+import com.mycompany.logic.Document;
 import com.mycompany.logic.Payment;
 import com.mycompany.logic.Sale;
 import java.util.Date;
@@ -8,7 +9,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-01-07T19:37:18", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-01-07T23:46:28", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Client.class)
 public class Client_ { 
 
@@ -16,6 +17,7 @@ public class Client_ {
     public static volatile SingularAttribute<Client, Integer> carriage;
     public static volatile SingularAttribute<Client, String> color;
     public static volatile ListAttribute<Client, Payment> payments;
+    public static volatile ListAttribute<Client, Document> document;
     public static volatile SingularAttribute<Client, Date> dateDeceased;
     public static volatile SingularAttribute<Client, String> kindship;
     public static volatile SingularAttribute<Client, String> nameDeceased;

@@ -39,6 +39,9 @@ public class Client implements Serializable {
     @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
     private List<Payment> payments;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
+    private List<Document> document;
+    
     private String rutDeceased;
     private String nameDeceased;
     private Date dateDeceased;

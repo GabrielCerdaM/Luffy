@@ -11,11 +11,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.mycompany.logic.Client;
 import com.mycompany.logic.DetailSale;
-import java.util.ArrayList;
-import java.util.List;
-import com.mycompany.logic.Document;
 import com.mycompany.logic.Sale;
 import com.mycompany.persistance.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,9 +42,6 @@ public class SaleJpaController implements Serializable {
         if (sale.getDetailSale() == null) {
             sale.setDetailSale(new ArrayList<DetailSale>());
         }
-        if (sale.getDocument() == null) {
-            sale.setDocument(new ArrayList<Document>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -61,12 +57,6 @@ public class SaleJpaController implements Serializable {
                 attachedDetailSale.add(detailSaleDetailSaleToAttach);
             }
             sale.setDetailSale(attachedDetailSale);
-            List<Document> attachedDocument = new ArrayList<Document>();
-            for (Document documentDocumentToAttach : sale.getDocument()) {
-                documentDocumentToAttach = em.getReference(documentDocumentToAttach.getClass(), documentDocumentToAttach.getId());
-                attachedDocument.add(documentDocumentToAttach);
-            }
-            sale.setDocument(attachedDocument);
             em.persist(sale);
             if (client != null) {
                 client.getSale().add(sale);
@@ -79,15 +69,6 @@ public class SaleJpaController implements Serializable {
                 if (oldSaleOfDetailSaleDetailSale != null) {
                     oldSaleOfDetailSaleDetailSale.getDetailSale().remove(detailSaleDetailSale);
                     oldSaleOfDetailSaleDetailSale = em.merge(oldSaleOfDetailSaleDetailSale);
-                }
-            }
-            for (Document documentDocument : sale.getDocument()) {
-                Sale oldSaleOfDocumentDocument = documentDocument.getSale();
-                documentDocument.setSale(sale);
-                documentDocument = em.merge(documentDocument);
-                if (oldSaleOfDocumentDocument != null) {
-                    oldSaleOfDocumentDocument.getDocument().remove(documentDocument);
-                    oldSaleOfDocumentDocument = em.merge(oldSaleOfDocumentDocument);
                 }
             }
             em.getTransaction().commit();
@@ -108,8 +89,6 @@ public class SaleJpaController implements Serializable {
             Client clientNew = sale.getClient();
             List<DetailSale> detailSaleOld = persistentSale.getDetailSale();
             List<DetailSale> detailSaleNew = sale.getDetailSale();
-            List<Document> documentOld = persistentSale.getDocument();
-            List<Document> documentNew = sale.getDocument();
             if (clientNew != null) {
                 clientNew = em.getReference(clientNew.getClass(), clientNew.getId());
                 sale.setClient(clientNew);
@@ -121,13 +100,6 @@ public class SaleJpaController implements Serializable {
             }
             detailSaleNew = attachedDetailSaleNew;
             sale.setDetailSale(detailSaleNew);
-            List<Document> attachedDocumentNew = new ArrayList<Document>();
-            for (Document documentNewDocumentToAttach : documentNew) {
-                documentNewDocumentToAttach = em.getReference(documentNewDocumentToAttach.getClass(), documentNewDocumentToAttach.getId());
-                attachedDocumentNew.add(documentNewDocumentToAttach);
-            }
-            documentNew = attachedDocumentNew;
-            sale.setDocument(documentNew);
             sale = em.merge(sale);
             if (clientOld != null && !clientOld.equals(clientNew)) {
                 clientOld.getSale().remove(sale);
@@ -151,23 +123,6 @@ public class SaleJpaController implements Serializable {
                     if (oldSaleOfDetailSaleNewDetailSale != null && !oldSaleOfDetailSaleNewDetailSale.equals(sale)) {
                         oldSaleOfDetailSaleNewDetailSale.getDetailSale().remove(detailSaleNewDetailSale);
                         oldSaleOfDetailSaleNewDetailSale = em.merge(oldSaleOfDetailSaleNewDetailSale);
-                    }
-                }
-            }
-            for (Document documentOldDocument : documentOld) {
-                if (!documentNew.contains(documentOldDocument)) {
-                    documentOldDocument.setSale(null);
-                    documentOldDocument = em.merge(documentOldDocument);
-                }
-            }
-            for (Document documentNewDocument : documentNew) {
-                if (!documentOld.contains(documentNewDocument)) {
-                    Sale oldSaleOfDocumentNewDocument = documentNewDocument.getSale();
-                    documentNewDocument.setSale(sale);
-                    documentNewDocument = em.merge(documentNewDocument);
-                    if (oldSaleOfDocumentNewDocument != null && !oldSaleOfDocumentNewDocument.equals(sale)) {
-                        oldSaleOfDocumentNewDocument.getDocument().remove(documentNewDocument);
-                        oldSaleOfDocumentNewDocument = em.merge(oldSaleOfDocumentNewDocument);
                     }
                 }
             }
@@ -209,11 +164,6 @@ public class SaleJpaController implements Serializable {
             for (DetailSale detailSaleDetailSale : detailSale) {
                 detailSaleDetailSale.setSale(null);
                 detailSaleDetailSale = em.merge(detailSaleDetailSale);
-            }
-            List<Document> document = sale.getDocument();
-            for (Document documentDocument : document) {
-                documentDocument.setSale(null);
-                documentDocument = em.merge(documentDocument);
             }
             em.remove(sale);
             em.getTransaction().commit();

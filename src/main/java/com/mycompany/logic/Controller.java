@@ -86,6 +86,16 @@ public class Controller {
         return null;
     }
 
+    public int getLastDocumentId() {
+        List<Document> docs = getDocuments();
+        int size = docs.size() - 1;
+        if (size == -1) {
+            return 0;
+        }
+        Document doc = docs.get(size);
+        return doc.getId();
+    }
+    
     private int getLastPaymentId() {
         List<Payment> payments = getAllPayments();
         int size = payments.size() - 1;
@@ -453,6 +463,25 @@ public class Controller {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Document> getDocuments() {
+        return persistanceController.getDocuments();
+    }
+    
+    public List<Document> getDocuments(int clientId) {
+        return persistanceController.getDocuments(clientId);
+    }
+
+    public boolean createDocument(Client client, String name, String path) {
+        String extension =  path.toString().toLowerCase().endsWith(".") ? "" : path.toString().substring(path.toString().lastIndexOf(".") + 1);
+        Document d = new Document();
+        d.setId(getLastDocumentId() + 1);
+        d.setClient(client);
+        d.setName(name);
+        d.setExtension(extension);
+        d.setLocation(path);
+        return persistanceController.createDocument(d);
     }
 
 }

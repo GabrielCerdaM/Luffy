@@ -39,11 +39,6 @@ public class Sale implements Serializable {
     @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
     private List<DetailSale> detailSale;
 
-//    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
-//    private List<Payment> payment;
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
-    private List<Document> document;
-
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
@@ -63,14 +58,13 @@ public class Sale implements Serializable {
     public Sale() {
     }
 
-    public Sale(int id, boolean payment_status, int total, double iva, Client client, List<DetailSale> detailSale, List<Document> document, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Sale(int id, boolean payment_status, int total, double iva, Client client, List<DetailSale> detailSale, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.payment_status = payment_status;
         this.total = total;
         this.iva = iva;
         this.client = client;
         this.detailSale = detailSale;
-        this.document = document;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -114,14 +108,6 @@ public class Sale implements Serializable {
 
     public void setDetailSale(List<DetailSale> detailSale) {
         this.detailSale = detailSale;
-    }
-
-    public List<Document> getDocument() {
-        return document;
-    }
-
-    public void setDocument(List<Document> document) {
-        this.document = document;
     }
 
     public LocalDateTime getCreatedAt() {

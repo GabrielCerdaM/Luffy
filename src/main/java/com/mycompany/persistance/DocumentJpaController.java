@@ -5,27 +5,27 @@
 package com.mycompany.persistance;
 
 import com.mycompany.logic.Document;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import com.mycompany.logic.Sale;
 import com.mycompany.persistance.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author Gabriel
  */
 public class DocumentJpaController implements Serializable {
+
     public DocumentJpaController() {
         this.emf = Persistence.createEntityManagerFactory("Luffy_PU");
     }
-    
+
     public DocumentJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -40,16 +40,7 @@ public class DocumentJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Sale sale = document.getSale();
-            if (sale != null) {
-                sale = em.getReference(sale.getClass(), sale.getId());
-                document.setSale(sale);
-            }
             em.persist(document);
-            if (sale != null) {
-                sale.getDocument().add(document);
-                sale = em.merge(sale);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -63,22 +54,7 @@ public class DocumentJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Document persistentDocument = em.find(Document.class, document.getId());
-            Sale saleOld = persistentDocument.getSale();
-            Sale saleNew = document.getSale();
-            if (saleNew != null) {
-                saleNew = em.getReference(saleNew.getClass(), saleNew.getId());
-                document.setSale(saleNew);
-            }
             document = em.merge(document);
-            if (saleOld != null && !saleOld.equals(saleNew)) {
-                saleOld.getDocument().remove(document);
-                saleOld = em.merge(saleOld);
-            }
-            if (saleNew != null && !saleNew.equals(saleOld)) {
-                saleNew.getDocument().add(document);
-                saleNew = em.merge(saleNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -107,11 +83,6 @@ public class DocumentJpaController implements Serializable {
                 document.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The document with id " + id + " no longer exists.", enfe);
-            }
-            Sale sale = document.getSale();
-            if (sale != null) {
-                sale.getDocument().remove(document);
-                sale = em.merge(sale);
             }
             em.remove(document);
             em.getTransaction().commit();
@@ -167,5 +138,5 @@ public class DocumentJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }
