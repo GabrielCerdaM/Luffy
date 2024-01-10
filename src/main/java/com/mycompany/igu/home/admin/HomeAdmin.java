@@ -5,6 +5,7 @@
 package com.mycompany.igu.home.admin;
 
 import com.mycompany.igu.Client.ClientAdminView;
+import com.mycompany.igu.Login;
 import com.mycompany.igu.Main;
 import com.mycompany.igu.payment.PaymentView;
 import com.mycompany.logic.Controller;
@@ -141,7 +142,7 @@ public class HomeAdmin extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-        Main login = new Main();
+        Login login = new Login(controller);
         login.setVisible(true);
         login.setLocationRelativeTo(null);
         this.dispose();

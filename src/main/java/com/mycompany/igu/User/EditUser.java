@@ -24,9 +24,9 @@ public class EditUser extends javax.swing.JFrame {
     private Controller controller;
     private int userId;
     private User user;
-    public EditUser(Controller controller, int userId) {
+    public EditUser(Controller c, int userId) {
         initComponents();
-        this.controller = new Controller();
+        this.controller = c;
         this.userId = userId;
     }
 

@@ -33,17 +33,35 @@ import javax.persistence.criteria.Root;
  */
 public class PersistanceController {
 
-    UserJpaController userJpa = new UserJpaController();
-    RolJpaController rolJpa = new RolJpaController();
-    ProviderJpaController providerJpa = new ProviderJpaController();
-    SaleJpaController saleJpa = new SaleJpaController();
-    CategoryJpaController categoryJpa = new CategoryJpaController();
-    SubcategoryJpaController subcategoryJpa = new SubcategoryJpaController();
-    ProductJpaController productJpa = new ProductJpaController();
-    DetailSaleJpaController detailSaleJpa = new DetailSaleJpaController();
-    ClientJpaController clientJpa = new ClientJpaController();
-    PaymentJpaController paymentJpa = new PaymentJpaController();
-    DocumentJpaController documentJpa = new DocumentJpaController();
+    UserJpaController userJpa;
+    RolJpaController rolJpa;
+    ProviderJpaController providerJpa;
+    SaleJpaController saleJpa;
+    CategoryJpaController categoryJpa;
+    SubcategoryJpaController subcategoryJpa;
+    ProductJpaController productJpa;
+    DetailSaleJpaController detailSaleJpa;
+    ClientJpaController clientJpa;
+    PaymentJpaController paymentJpa;
+    DocumentJpaController documentJpa;
+
+    public PersistanceController() {
+        try {
+            userJpa = new UserJpaController();
+            rolJpa = new RolJpaController();
+            providerJpa = new ProviderJpaController();
+            saleJpa = new SaleJpaController();
+            categoryJpa = new CategoryJpaController();
+            subcategoryJpa = new SubcategoryJpaController();
+            productJpa = new ProductJpaController();
+            detailSaleJpa = new DetailSaleJpaController();
+            clientJpa = new ClientJpaController();
+            paymentJpa = new PaymentJpaController();
+            documentJpa = new DocumentJpaController();
+        } catch (Exception e) {
+            Utils.showMessage(e.getMessage(), "Error", "Error al conectar la base de datos");
+        }
+    }
 
     public List<User> getUsers() {
         return userJpa.findUserEntities();

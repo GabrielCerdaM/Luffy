@@ -7,9 +7,6 @@ package com.mycompany.logic;
 import com.mycompany.persistance.PersistanceController;
 import com.mycompany.persistance.exceptions.NonexistentEntityException;
 import com.mycompany.utils.Utils;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +19,19 @@ import java.util.logging.Logger;
  */
 public class Controller {
 
-    PersistanceController persistanceController = new PersistanceController();
+    PersistanceController persistanceController;
+
+    public Controller(PersistanceController persistanceController) {
+        this.persistanceController = persistanceController;
+    }
+
+    public PersistanceController getPersistanceController() {
+        return persistanceController;
+    }
+
+    public void setPersistanceController(PersistanceController persistanceController) {
+        this.persistanceController = persistanceController;
+    }
 
     public User login(String username, char[] password) {
         List<User> users = persistanceController.getUsers();
@@ -95,7 +104,7 @@ public class Controller {
         Document doc = docs.get(size);
         return doc.getId();
     }
-    
+
     private int getLastPaymentId() {
         List<Payment> payments = getAllPayments();
         int size = payments.size() - 1;
@@ -382,7 +391,7 @@ public class Controller {
     public List<Client> getClients() {
         return persistanceController.getClients();
     }
-    
+
     public List<Client> getClients(String search) {
         return persistanceController.getClients(search);
     }
@@ -442,10 +451,10 @@ public class Controller {
     }
 
     private List<Payment> getAllPayments() {
-       return persistanceController.getPayments();
+        return persistanceController.getPayments();
     }
 
-    public void editClient(Client c,String phone, String email, String address, String wakeAddress, int carriageValue, int accompanimentValue, int announcementsValue, String color, String cementery) throws Exception {
+    public void editClient(Client c, String phone, String email, String address, String wakeAddress, int carriageValue, int accompanimentValue, int announcementsValue, String color, String cementery) throws Exception {
         c.setPhone(phone);
         c.setEmail(email);
         c.setWakeAddress(wakeAddress);
@@ -468,13 +477,13 @@ public class Controller {
     public List<Document> getDocuments() {
         return persistanceController.getDocuments();
     }
-    
+
     public List<Document> getDocuments(int clientId) {
         return persistanceController.getDocuments(clientId);
     }
 
     public boolean createDocument(Client client, String name, String path) {
-        String extension =  path.toString().toLowerCase().endsWith(".") ? "" : path.toString().substring(path.toString().lastIndexOf(".") + 1);
+        String extension = path.toString().toLowerCase().endsWith(".") ? "" : path.toString().substring(path.toString().lastIndexOf(".") + 1);
         Document d = new Document();
         d.setId(getLastDocumentId() + 1);
         d.setClient(client);
